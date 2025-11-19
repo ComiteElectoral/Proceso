@@ -207,27 +207,58 @@
     }
     
     .btn-plan {
-        /* background-color: var(--color-btn-plan); ANTES: Removido para usar degradado */
-        background: linear-gradient(to bottom, #8B4513, #A0522D); /* Degradado de marrón oscuro a sienna */
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        font-weight: 600;
-        cursor: pointer;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        box-shadow: var(--sombra-sutil);
-        transition: background 0.2s, transform 0.2s; /* Cambia 'background-color' a 'background' */
-        width: 80%; /* Ancho que ocupa la mayor parte del espacio */
-        max-width: 250px;
-    }
+    /* Estilos base de tu botón (ajusta colores si es necesario) */
+    display: inline-flex;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #A0522D; /* Color base (Marrón tierra) */
+    color: white;
+    font-weight: 700;
+    border-radius: 8px;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-plan i {
+    margin-right: 10px;
+    font-size: 1.1em;
+}
     
     .btn-plan:hover {
-        background: linear-gradient(to bottom, #A0522D, #8B4513); /* Invierte el degradado al pasar el ratón */
-        transform: translateY(-2px);
-        box-shadow: var(--sombra-profunda);
+        background-color: #8B4513; /* Tono más oscuro al pasar el ratón */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
     }
+
+    /* --- ESTILOS DEL EFECTO DE ÉXITO --- */
+
+/* Clase que se añade al finalizar la descarga */
+.btn-plan.download-complete {
+    background-color: #4CAF50; /* Verde de éxito */
+    animation: successPulse 1.5s ease-out;
+    box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7); /* Sombra inicial transparente */
+    transform: scale(1.05);
+}
+
+/* Animación del Pulso Verde */
+@keyframes successPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7);
+        transform: scale(1);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(76, 175, 80, 0);
+        transform: scale(1.05);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
+        transform: scale(1);
+    }
+}
 
     /* ---------------------------------------------------------- */
     /* Grid de Candidatos (Tabla) */
@@ -428,7 +459,13 @@
                 <h3>Lista N° 01</h3>
                 
                 <div class="contenedor-planes">
-                    <button class="btn-plan">Ver Plan Lista 1</button>
+                   
+                    <a href="https://14CuadrillaHSVCL.github.io/Proceso/Plan_de_Trabajo_Lista_1.pdf" 
+       download="Plan_de_Trabajo_Lista_1.pdf" 
+       class="btn-plan" 
+       id="btn-descarga-plan">
+        <i class="fas fa-file-pdf"></i> Ver Plan Lista 1
+    </a>
                 </div>
                 <div class="candidatos-grid">
                     
@@ -548,10 +585,10 @@
                     </div>
                     <div class="candidato-fila">
                         <strong>Sec. Cultura y Deportes</strong>
-                        <span class="candidato-nombre">SOTO SÁNCHEZ Marcos Geissel</span>
+                        <span class="candidato-nombre">VEDON TEJADA Eduardo</span>
                         <span class="candidato-grado">
                             <span class="grado-icono">
-                                <img src="https://edwinhsvcl14-maker.github.io/asistencias/7_.png" alt="Logo C/GS 7">
+                                <img src="https://edwinhsvcl14-maker.github.io/asistencias/15_.png" alt="Logo C/GS 7">
                             </span>
                         </span>
                     </div>
@@ -772,6 +809,42 @@
 </div>
     </div>
 <script>
+
+    document.addEventListener('DOMContentLoaded', () => {
+    const downloadButton = document.getElementById('btn-descarga-plan');
+
+    if (downloadButton) {
+        downloadButton.addEventListener('click', function(e) {
+            
+            // 1. Quitar la clase de éxito por si ya la tenía de antes
+            this.classList.remove('download-complete');
+            
+            // 2. CAMBIO DE TEXTO Y ICONO DE INICIO (opcional, pero genial)
+            const originalText = this.innerHTML;
+            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Preparando descarga...';
+            
+            // 3. Simulación de Éxito con Retraso
+            // El navegador comienza la descarga, y nosotros esperamos un segundo
+            // para aplicar la animación de éxito.
+            setTimeout(() => {
+                
+                // Aplicar la animación de éxito (clase 'download-complete')
+                this.classList.add('download-complete');
+                
+                // Cambiar el icono a un checkmark de éxito
+                this.innerHTML = '<i class="fas fa-check-circle"></i> ¡Descargado!';
+                
+                // 4. Volver al estado original después de un tiempo (para que el botón sea reutilizable)
+                setTimeout(() => {
+                    this.classList.remove('download-complete');
+                    this.innerHTML = originalText; // Vuelve al texto original
+                }, 2000); // El efecto de pulso dura 1.5s, así que esperamos 2s
+                
+            }, 1000); // 1 segundo de "preparación"
+        });
+    }
+});
+    
     window.addEventListener('load', () => {
         const preloader = document.getElementById('preloader');
         const mainContainer = document.getElementById('mainContainer');
