@@ -857,20 +857,19 @@
     });
 });
     
-    window.addEventListener('load', () => {
-        const preloader = document.getElementById('preloader');
-        const mainContainer = document.getElementById('mainContainer');
+   window.addEventListener('load', () => {
+    const preloader = document.getElementById('preloader');
+    const mainContainer = document.getElementById('mainContainer');
+    
+    // CORREGIDO: Establece el retraso a 3000 milisegundos (3 segundos)
+    setTimeout(() => {
+        // 1. Ocultar el preloader
+        preloader.classList.add('hidden');
         
-        // CORREGIDO: Establece el retraso de 3000 milisegundos (3 segundos)
-        setTimeout(() => {
-            // 1. Ocultar el preloader (la transición CSS de 3s se encargará del fade-out)
-            preloader.classList.add('hidden');
-            
-            // 2. Mostrar el contenido principal al mismo tiempo que el preloader empieza a desaparecer
-            // La transición CSS del contenedor hará que aparezca suavemente
-            mainContainer.classList.add('visible');
-        }, 1000); // 3000 milisegundos = 3 segundos
-    });
+        // 2. Mostrar el contenido principal
+        mainContainer.classList.add('visible');
+    }, 3000); // <<--- ¡CORREGIDO A 3000 ms!
+});
 </script>
 </body>
 </html>
