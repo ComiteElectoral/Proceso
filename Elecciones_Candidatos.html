@@ -815,39 +815,48 @@
     </div>
 <script>
 
-    document.addEventListener('DOMContentLoaded', () => {
-    const downloadButton = document.getElementById('btn-descarga-plan');
+   document.addEventListener('DOMContentLoaded', () => {
+    
+    // CAMBIO CLAVE: Usamos querySelectorAll para obtener TODOS los botones con la clase 'btn-plan'
+    const downloadButtons = document.querySelectorAll('.btn-plan');
 
-    if (downloadButton) {
+    // Iteramos sobre cada botón encontrado y le adjuntamos el evento 'click'
+    downloadButtons.forEach(downloadButton => {
         downloadButton.addEventListener('click', function(e) {
             
-            // 1. Quitar la clase de éxito por si ya la tenía de antes
+            // e.preventDefault(); // Descomenta esta línea si no quieres que inicie la descarga real
+
+            // Aseguramos que 'this' se refiere al botón que fue clickeado
             this.classList.remove('download-complete');
             
-            // 2. CAMBIO DE TEXTO Y ICONO DE INICIO (opcional, pero genial)
-            const originalText = this.innerHTML;
+            // 1. Guardar el estado original del botón
+            const originalHTML = this.innerHTML;
+            
+            // 2. CAMBIO DE TEXTO Y ICONO DE INICIO (Preparando)
             this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Preparando descarga...';
             
-            // 3. Simulación de Éxito con Retraso
-            // El navegador comienza la descarga, y nosotros esperamos un segundo
-            // para aplicar la animación de éxito.
+            // 3. Simulación de Éxito con Retraso (El efecto "bacán")
+            // Esperamos un momento para que el navegador inicie la descarga y aplicamos el efecto.
             setTimeout(() => {
                 
-                // Aplicar la animación de éxito (clase 'download-complete')
+                // Aplicar la animación de éxito (clase 'download-complete' del CSS)
                 this.classList.add('download-complete');
                 
                 // Cambiar el icono a un checkmark de éxito
                 this.innerHTML = '<i class="fas fa-check-circle"></i> ¡Descargado!';
                 
-                // 4. Volver al estado original después de un tiempo (para que el botón sea reutilizable)
+                // 4. Volver al estado original después de un tiempo
                 setTimeout(() => {
                     this.classList.remove('download-complete');
-                    this.innerHTML = originalText; // Vuelve al texto original
-                }, 2000); // El efecto de pulso dura 1.5s, así que esperamos 2s
+                    this.innerHTML = originalHTML; // Vuelve al contenido original (icono PDF + texto)
+                }, 2000); 
                 
-            }, 1000); // 1 segundo de "preparación"
+            }, 1000); 
         });
-    }
+    });
+
+    // IMPORTANTE: Asegúrate de tener esta línea en tu <head> para que los iconos funcionen:
+    // <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> 
 });
     
     window.addEventListener('load', () => {
