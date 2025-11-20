@@ -244,6 +244,32 @@
     transform: scale(1.05);
 }
 
+    /* --- NUEVOS ESTILOS PARA EL ICONO PDF VOLADOR --- */
+.floating-pdf-icon {
+    position: fixed; /* O 'absolute' si el contenedor es position:relative */
+    font-size: 2.5em; /* Tamaño del icono flotante */
+    color: var(--color-rama); /* O el color que prefieras para el icono flotante */
+    opacity: 1;
+    z-index: 9999; /* Para que esté por encima de todo */
+    pointer-events: none; /* Para que no interfiera con otros clics */
+    animation: flyOutPdf 1.5s ease-out forwards; /* Duración y tipo de animación */
+}
+
+    @keyframes flyOutPdf {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: translate(50px, -80px) scale(1.2); /* Vuela un poco hacia arriba y a la derecha */
+        opacity: 0.8;
+    }
+    100% {
+        transform: translate(100px, -150px) scale(0.5); /* Se aleja y se encoge */
+        opacity: 0;
+    }
+}
+
 /* Animación del Pulso Verde */
 @keyframes successPulse {
     0% {
@@ -814,7 +840,7 @@
     </div>
 <script>
 
-  document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
     
     // Obtiene TODOS los elementos con la clase 'btn-plan'
     const downloadButtons = document.querySelectorAll('.btn-plan');
@@ -833,11 +859,30 @@
             const originalHTML = clickedButton.innerHTML;
             
             // 3. CAMBIO DE TEXTO Y ICONO DE INICIO (Preparando)
-            // Usamos un ícono de Font Awesome para el spinner
             clickedButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Preparando descarga...';
             
-            // 4. Simulación de Éxito con Retraso
-            // Damos 1 segundo para que la descarga inicie en el navegador antes de aplicar el efecto visual
+            // ----------------------------------------------------
+            // LÓGICA DEL ICONO PDF VOLADOR (Efecto "Bacán")
+            // ----------------------------------------------------
+            const buttonRect = clickedButton.getBoundingClientRect();
+            
+            const floatingIcon = document.createElement('i');
+            // Añadimos las clases para Font Awesome y la clase de animación CSS
+            floatingIcon.classList.add('fas', 'fa-file-pdf', 'floating-pdf-icon');
+            
+            // Posicionar el icono flotante justo encima del centro del botón
+            floatingIcon.style.left = `${buttonRect.left + (buttonRect.width / 2) - 15}px`; 
+            floatingIcon.style.top = `${buttonRect.top + (buttonRect.height / 2) - 15}px`;   
+            
+            document.body.appendChild(floatingIcon);
+
+            // Eliminar el icono flotante una vez que su animación haya terminado
+            floatingIcon.addEventListener('animationend', () => {
+                floatingIcon.remove();
+            });
+            // ----------------------------------------------------
+            
+            // 4. Simulación de Éxito con Retraso (Para la animación del botón)
             setTimeout(() => {
                 
                 // Aplicar la clase de animación (genera el pulso)
