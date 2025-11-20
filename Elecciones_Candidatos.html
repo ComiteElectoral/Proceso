@@ -462,8 +462,7 @@
                    
                     <a href="https://14CuadrillaHSVCL.github.io/Proceso/Plan_de_Trabajo_Lista_1.pdf" 
        download="Plan_de_Trabajo_Lista_1.pdf" 
-       class="btn-plan" 
-       id="btn-descarga-plan">
+       class="btn-plan" >
         <i class="fas fa-file-pdf"></i> Ver Plan Lista 1
     </a>
                 </div>
@@ -639,7 +638,7 @@
                      <a href="https://14CuadrillaHSVCL.github.io/Proceso/Plan_de_Trabajo_Lista_2.pdf" 
        download="Plan_de_Trabajo_Lista_2.pdf" 
        class="btn-plan" 
-       id="btn-descarga-plan">
+       >
         <i class="fas fa-file-pdf"></i> Ver Plan Lista 2
     </a>
                 </div>
@@ -815,48 +814,47 @@
     </div>
 <script>
 
-   document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('DOMContentLoaded', () => {
     
-    // CAMBIO CLAVE: Usamos querySelectorAll para obtener TODOS los botones con la clase 'btn-plan'
+    // Obtiene TODOS los elementos con la clase 'btn-plan'
     const downloadButtons = document.querySelectorAll('.btn-plan');
 
-    // Iteramos sobre cada botón encontrado y le adjuntamos el evento 'click'
+    // Itera sobre cada botón para adjuntar la misma lógica
     downloadButtons.forEach(downloadButton => {
         downloadButton.addEventListener('click', function(e) {
             
-            // e.preventDefault(); // Descomenta esta línea si no quieres que inicie la descarga real
-
-            // Aseguramos que 'this' se refiere al botón que fue clickeado
-            this.classList.remove('download-complete');
+            // 'this' es el botón que se hizo clic.
+            const clickedButton = this;
             
-            // 1. Guardar el estado original del botón
-            const originalHTML = this.innerHTML;
+            // 1. Quitar la clase de éxito si ya la tenía
+            clickedButton.classList.remove('download-complete');
             
-            // 2. CAMBIO DE TEXTO Y ICONO DE INICIO (Preparando)
-            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Preparando descarga...';
+            // 2. Guardar el estado original del botón (Incluyendo el icono y el texto)
+            const originalHTML = clickedButton.innerHTML;
             
-            // 3. Simulación de Éxito con Retraso (El efecto "bacán")
-            // Esperamos un momento para que el navegador inicie la descarga y aplicamos el efecto.
+            // 3. CAMBIO DE TEXTO Y ICONO DE INICIO (Preparando)
+            // Usamos un ícono de Font Awesome para el spinner
+            clickedButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Preparando descarga...';
+            
+            // 4. Simulación de Éxito con Retraso
+            // Damos 1 segundo para que la descarga inicie en el navegador antes de aplicar el efecto visual
             setTimeout(() => {
                 
-                // Aplicar la animación de éxito (clase 'download-complete' del CSS)
-                this.classList.add('download-complete');
+                // Aplicar la clase de animación (genera el pulso)
+                clickedButton.classList.add('download-complete');
                 
                 // Cambiar el icono a un checkmark de éxito
-                this.innerHTML = '<i class="fas fa-check-circle"></i> ¡Descargado!';
+                clickedButton.innerHTML = '<i class="fas fa-check-circle"></i> ¡Descargado!';
                 
-                // 4. Volver al estado original después de un tiempo
+                // 5. Volver al estado original después de que la animación termine (2 segundos)
                 setTimeout(() => {
-                    this.classList.remove('download-complete');
-                    this.innerHTML = originalHTML; // Vuelve al contenido original (icono PDF + texto)
+                    clickedButton.classList.remove('download-complete');
+                    clickedButton.innerHTML = originalHTML; // Vuelve al contenido original
                 }, 2000); 
                 
             }, 1000); 
         });
     });
-
-    // IMPORTANTE: Asegúrate de tener esta línea en tu <head> para que los iconos funcionen:
-    // <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> 
 });
     
     window.addEventListener('load', () => {
