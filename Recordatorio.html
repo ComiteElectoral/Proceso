@@ -399,10 +399,7 @@
 </head>
 <body>
 
-    <div id="preloader">
-        <div class="loader"></div>
-        <div class="loader-text">Cargando Información Electoral...</div>
-    </div>
+  
 
     <div class="contenedor" id="main-content">
         
@@ -534,20 +531,7 @@
 
     <script>
         // Ocultar el preloader después de 3 segundos
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                const preloader = document.getElementById('preloader');
-                const content = document.getElementById('main-content');
-                
-                // Ocultar preloader
-                preloader.classList.add('hidden');
-                
-                // Mostrar contenido principal
-                setTimeout(function() {
-                    content.classList.add('visible');
-                }, 100);
-            }, 3000); // Duración de 3 segundos
-        });
+       
 
 
         // Función para simular la descarga y el efecto visual del botón
