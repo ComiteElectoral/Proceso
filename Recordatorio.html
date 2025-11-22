@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proceso Electoral - Hermandad Virgen del Carmen</title>
+    <title>Proceso Electoral - Décima Cuarta Cuadrilla HSVCL</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -29,11 +29,11 @@
             padding: 0;
             background-color: var(--color-secundario);
             color: var(--color-texto-oscuro);
-            min-height: 100vh; /* Asegura altura para el preloader */
+            min-height: 100vh;
         }
 
         /* ---------------------------------------------------------- */
-        /* ESTILOS DE CARGA (PRELOADER) - TRANSICIÓN VUELVE A 3S */
+        /* ESTILOS DE CARGA (PRELOADER) */
         /* ---------------------------------------------------------- */
         #preloader {
             position: fixed;
@@ -41,7 +41,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: var(--color-principal); /* Cream base */
+            background-color: var(--color-principal);
             z-index: 9999;
             display: flex;
             flex-direction: column;
@@ -49,22 +49,19 @@
             align-items: center;
             opacity: 1;
             visibility: visible;
-            /* CORREGIDO: DURACIÓN DE TRANSICIÓN DEL PRELOADER VUELVE A 3 SEGUNDOS */
             transition: opacity 3s ease-out, visibility 3s ease-out;
         }
 
-        /* Estado de preloader oculto */
         #preloader.hidden {
             opacity: 0;
             visibility: hidden;
         }
 
-        /* Estilo del GIF/Icono de carga (Spinner) */
         .loader {
             width: 120px;
             height: 120px;
             border: 10px solid var(--color-secundario);
-            border-top: 10px solid var(--color-acento); /* Color de acento para la animación */
+            border-top: 10px solid var(--color-acento);
             border-radius: 50%;
             animation: spin 1.2s linear infinite;
             margin-bottom: 20px;
@@ -84,7 +81,7 @@
         }
         
         /* ---------------------------------------------------------- */
-        /* ESTILOS DE CONTENEDOR PRINCIPAL - VUELVEN A OCULTARSE INICIALMENTE */
+        /* ESTILOS DE CONTENEDOR PRINCIPAL */
         /* ---------------------------------------------------------- */
         .contenedor {
             width: 95%;
@@ -94,21 +91,18 @@
             box-shadow: var(--sombra-profunda);
             border-radius: 15px;
             padding: 30px;
-            
-            /* CORREGIDO: VUELVE A ESTAR OCULTO INICIALMENTE */
             opacity: 0;
             transform: translateY(20px);
-            transition: opacity 1s ease-in, transform 1s ease-in; /* Transición suave de aparición */
+            transition: opacity 1s ease-in, transform 1s ease-in;
         }
         
-        /* Estado visible después de la carga (3 segundos) */
         .contenedor.visible {
             opacity: 1;
             transform: translateY(0);
         }
 
         /* ---------------------------------------------------------- */
-        /* ENCABEZADO PRINCIPAL (Estilos forzados con !important) */
+        /* ENCABEZADO PRINCIPAL (Alineación con Flexbox) */
         /* ---------------------------------------------------------- */
         .main-header {
             display: flex !important;
@@ -122,14 +116,14 @@
 
         /* Logotipos */
         .logo-header {
-        width: 200px !important; /* <--- MODIFICADO DE 100px A 200px */
-        height: 200px !important; /* <--- MODIFICADO DE 100px A 200px */
+        width: 200px !important;
+        height: 200px !important;
         margin: 0 20px !important;
         flex-shrink: 0 !important;
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
-    }
+        }
 
         .logo-header img {
             max-width: 100% !important;
@@ -195,98 +189,74 @@
         }
 
         /* ========================================================== */
-        /* ESTILOS AÑADIDOS PARA LOS BOTONES DE PLAN */
+        /* ESTILOS DE BOTONES Y ANIMACIÓN DE DESCARGA */
         /* ========================================================== */
         .contenedor-planes {
             display: flex;
-            justify-content: center; /* Centrar el botón dentro de la tarjeta */
+            justify-content: center;
             padding: 10px 0 20px;
-            background-color: var(--color-principal); /* Color de fondo sutil para el área del botón */
+            background-color: var(--color-principal);
             border-bottom: 2px dashed var(--color-borde);
         }
         
         .btn-plan {
-        /* Estilos base de tu botón (ajusta colores si es necesario) */
-        display: inline-flex;
-        align-items: center;
-        padding: 15px 30px;
-        background-color: #A0522D; /* Color base (Marrón tierra) */
-        color: white;
-        font-weight: 700;
-        border-radius: 8px;
-        text-transform: uppercase;
-        text-decoration: none;
-        cursor: pointer;
-        border: none;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        transition: all 0.3s ease-in-out;
-    }
+            display: inline-flex;
+            align-items: center;
+            padding: 15px 30px;
+            background-color: #A0522D;
+            color: white;
+            font-weight: 700;
+            border-radius: 8px;
+            text-transform: uppercase;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease-in-out;
+        }
 
-    .btn-plan i {
-        margin-right: 10px;
-        font-size: 1.1em;
-    }
+        .btn-plan i {
+            margin-right: 10px;
+            font-size: 1.1em;
+        }
         
         .btn-plan:hover {
-            background-color: #8B4513; /* Tono más oscuro al pasar el ratón */
-        transform: translateY(-2px);
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            background-color: #8B4513;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
         }
 
-        /* --- ESTILOS DEL EFECTO DE ÉXITO --- */
-
-    /* Clase que se añade al finalizar la descarga */
-    .btn-plan.download-complete {
-        background-color: #4CAF50; /* Verde de éxito */
-        animation: successPulse 1.5s ease-out;
-        box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7); /* Sombra inicial transparente */
-        transform: scale(1.05);
-    }
-
-        /* --- NUEVOS ESTILOS PARA EL ICONO PDF VOLADOR --- */
-    .floating-pdf-icon {
-        position: fixed; /* O 'absolute' si el contenedor es position:relative */
-        font-size: 2.5em; /* Tamaño del icono flotante */
-        color: var(--color-rama); /* O el color que prefieras para el icono flotante */
-        opacity: 1;
-        z-index: 9999; /* Para que esté por encima de todo */
-        pointer-events: none; /* Para que no interfiera con otros clics */
-        animation: flyOutPdf 1.5s ease-out forwards; /* Duración y tipo de animación */
-    }
-
-        @keyframes flyOutPdf {
-        0% {
-            transform: translate(0, 0) scale(1);
-            opacity: 1;
-        }
-        50% {
-            transform: translate(50px, -80px) scale(1.2); /* Vuela un poco hacia arriba y a la derecha */
-            opacity: 0.8;
-        }
-        100% {
-            transform: translate(100px, -150px) scale(0.5); /* Se aleja y se encoge */
-            opacity: 0;
-        }
-    }
-
-    /* Animación del Pulso Verde */
-    @keyframes successPulse {
-        0% {
+        .btn-plan.download-complete {
+            background-color: #4CAF50;
+            animation: successPulse 1.5s ease-out;
             box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7);
-            transform: scale(1);
-        }
-        70% {
-            box-shadow: 0 0 0 10px rgba(76, 175, 80, 0);
             transform: scale(1.05);
         }
-        100% {
-            box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
-            transform: scale(1);
+
+        .floating-pdf-icon {
+            position: fixed;
+            font-size: 2.5em;
+            color: var(--color-acento); /* Usamos el color de acento */
+            opacity: 1;
+            z-index: 9999;
+            pointer-events: none;
+            animation: flyOutPdf 1.5s ease-out forwards;
         }
-    }
+
+        @keyframes flyOutPdf {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            50% { transform: translate(50px, -80px) scale(1.2); opacity: 0.8; }
+            100% { transform: translate(100px, -150px) scale(0.5); opacity: 0; }
+        }
+
+        @keyframes successPulse {
+            0% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7); transform: scale(1); }
+            70% { box-shadow: 0 0 0 10px rgba(76, 175, 80, 0); transform: scale(1.05); }
+            100% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0); transform: scale(1); }
+        }
 
         /* ---------------------------------------------------------- */
-        /* Grid de Candidatos (Tabla) */
+        /* Grid de Contenido (Filas de Reglas) */
         /* ---------------------------------------------------------- */
         .candidatos-grid {
             padding-bottom: 10px;
@@ -297,7 +267,6 @@
             grid-template-columns: 150px 1fr 80px;
             align-items: center;
             padding: 10px 20px;
-            /* NOTA: El margin-top fue removido para pegar el encabezado al botón */
             border-bottom: 3px solid var(--color-acento);
             background-color: var(--color-secundario);
             font-weight: 700;
@@ -305,7 +274,6 @@
             text-transform: uppercase;
         }
 
-        /* Estilo de Fila (Base) */
         .candidato-fila {
             display: grid;
             grid-template-columns: 150px 1fr 80px;
@@ -318,11 +286,10 @@
             z-index: 1;
         }
         
-        /* 🔥 INTERACTIVIDAD VISTOSA: Efecto Hover 🔥 */
         .candidato-fila:hover {
             background-color: var(--color-hover-fondo) !important;
-            transform: scale(1.02); /* Agrandamiento sutil */
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Sombra elegante para efecto 3D */
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             border-radius: 5px;
             border-color: transparent;
             z-index: 10;
@@ -353,31 +320,10 @@
             padding-left: 15px;
         }
 
-        /* ---------------------------------------------------------- */
-        /* ICONO DE CUADRILLA/GRUPO */
-        /* ---------------------------------------------------------- */
         .candidato-grado {
             display: flex;
             justify-content: center;
             align-items: center;
-        }
-        
-        .grado-icono {
-            width: 55px;
-            height: 55px;
-            background-color: white;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            border: 3px dotted var(--color-acento);
-        }
-
-        .grado-icono img {
-            width: 90%;
-            height: 90%;
-            object-fit: contain;
         }
         
         .grado-icono.gs {
@@ -396,63 +342,59 @@
         }
         
         /* ---------------------------------------------------------- */
-        /* PIE DE PÁGINA CENTRADO Y ESPACIADO */
+        /* PIE DE PÁGINA */
         /* ---------------------------------------------------------- */
         .pie-pagina {
-            text-align: center; /* Centra el texto */
-            padding: 15px 0 10px 0; /* Espacio interno arriba y abajo */
-            margin-top: 40px; /* Espacio de separación de las listas */
-            border-top: 1px solid var(--color-borde); /* Línea de separación sutil */
+            text-align: center;
+            padding: 15px 0 10px 0;
+            margin-top: 40px;
+            border-top: 1px solid var(--color-borde);
         }
 
         .pie-pagina p {
             font-size: 0.85em;
-            color: var(--color-texto-oscuro); /* Usando la variable de color oscura */
-            margin: 0; /* Elimina márgenes predeterminados del párrafo */
+            color: var(--color-texto-oscuro);
+            margin: 0;
             font-weight: 500;
         }
 
         /* ---------------------------------------------------------- */
-    /* Responsive Design */
-    /* ---------------------------------------------------------- */
-    @media (max-width: 900px) {
-        /* Encabezado */
-        .header-texto h1 { font-size: 1.8em !important; }
-        .header-texto h2 { font-size: 1.2em !important; }
-        .logo-header { width: 80px !important; height: 80px !important; margin: 0 10px !important; }
-        
-        /* Grid de Listas (Apilamiento) */
-        .listas-contenedor {
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
-    }
-
-    @media (max-width: 600px) {
-        .contenedor {
-            margin: 15px auto;
-            padding: 15px;
+        /* Responsive Design */
+        /* ---------------------------------------------------------- */
+        @media (max-width: 900px) {
+            .header-texto h1 { font-size: 1.8em !important; }
+            .header-texto h2 { font-size: 1.2em !important; }
+            .logo-header { width: 100px !important; height: 100px !important; margin: 0 10px !important; }
+            
+            .listas-contenedor {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
         }
 
-        /* Encabezado (Asegura el apilamiento en móvil) */
-        .main-header { flex-wrap: wrap !important; justify-content: space-around !important; }
-        .header-texto { order: 3 !important; width: 100% !important; margin-top: 15px !important; }
-        .header-texto h1 { font-size: 1.4em !important; letter-spacing: 1px !important; }
-        .header-texto h2 { font-size: 1em !important; }
-        
-        /* OCULTAR EL LOGO EN MÓVILES */
-        .logo-header {
-            display: none !important; /* <--- MODIFICACIÓN APLICADA */
-        }
+        @media (max-width: 600px) {
+            .contenedor {
+                margin: 15px auto;
+                padding: 15px;
+            }
 
-        /* Grid de Candidatos (Ajuste para móvil) */
-        .candidato-header-fila,
-        .candidato-fila {
-            grid-template-columns: 80px 1fr 50px;
-            padding: 8px 10px;
-            font-size: 0.8em;
+            .main-header { flex-wrap: wrap !important; justify-content: space-around !important; }
+            .header-texto { order: 3 !important; width: 100% !important; margin-top: 15px !important; }
+            .header-texto h1 { font-size: 1.4em !important; letter-spacing: 1px !important; }
+            .header-texto h2 { font-size: 1em !important; }
+            
+            /* OCULTAR EL LOGO EN MÓVILES */
+            .logo-header {
+                display: none !important;
+            }
+
+            .candidato-header-fila,
+            .candidato-fila {
+                grid-template-columns: 80px 1fr 50px;
+                padding: 8px 10px;
+                font-size: 0.8em;
+            }
         }
-    }
     </style>
 </head>
 <body>
@@ -466,26 +408,16 @@
         
         <header class="main-header">
             <div class="logo-header">
-               
+                <img src="https://edwinhsvcl14-maker.github.io/asistencias/logo_hermandad.png" alt="Logo de la Hermandad">
             </div>
 
-             <div class="main-header">
-            <div class="header-logo-container">
-                <div class="logo-header">
-                    <img src="https://edwinhsvcl14-maker.github.io/asistencias/logo_hermandad.png" alt="Logo de la Hermandad">
-                </div>
-                <div class="header-texto">
-                    <h1>DÉCIMA CUARTA CUADRILLA HSVCL</h1>
-                    <h2>Elecciones Generales Trienio 2026-2028: Proceso en Curso</h2>
-                </div>
-                <div class="logo-header">
-                    <img src="https://14CuadrillaHSVCL.github.io/Proceso/14c.png" alt="Logo de la Hermandad">
-                </div>
+            <div class="header-texto">
+                <h1>DÉCIMA CUARTA CUADRILLA HSVCL</h1>
+                <h2>Elecciones Generales Trienio 2026-2028: Proceso en Curso</h2>
             </div>
-        </div>
 
             <div class="logo-header">
-              
+                <img src="https://14CuadrillaHSVCL.github.io/Proceso/14c.png" alt="Logo de la Cuadrilla">
             </div>
         </header>
 
@@ -503,14 +435,17 @@
                         <div class="candidato-fila">
                             <div class="candidato-grado"><div class="grado-icono gs"><span>1</span></div></div>
                             <div class="candidato-nombre"><strong>09:00 a.m. a 01:00 p.m.</strong> (Inicio de sufragio)</div>
+                            <div class="candidato-grado"></div>
                         </div>
                         <div class="candidato-fila">
                             <div class="candidato-grado"><div class="grado-icono gs"><span>Receso</span></div></div>
                             <div class="candidato-nombre"><strong>01:00 p.m. a 01:30 p.m.</strong> (Almuerzo del Jurado Electoral, Miembros de mesa y Consejo de Disciplina)</div>
+                            <div class="candidato-grado"></div>
                         </div>
                         <div class="candidato-fila">
                             <div class="candidato-grado"><div class="grado-icono gs"><span>2</span></div></div>
                             <div class="candidato-nombre"><strong>01:30 p.m. a 04:00 p.m.</strong> (Reanudación del sufragio)</div>
+                            <div class="candidato-grado"></div>
                         </div>
                     </div>
                 </div>
@@ -525,7 +460,7 @@
                         </div>
                         <div class="candidato-fila">
                             <div class="candidato-grado"><div class="grado-icono gs"><span>3</span></div></div>
-                            <div class="candidato-nombre">Vestimenta: **Adecuada a la circunstancia** (NO buzo, NO sudadera, NO polo deportivo, NO zapatillas deportivas, NO short, NO gorras, NO lentes oscuros).</div>
+                            <div class="candidato-nombre">Vestimenta: **Adecuada** (NO buzo, NO sudadera, NO polo deportivo, NO zapatillas, NO short, NO gorras, NO lentes oscuros).</div>
                         </div>
                         <div class="candidato-fila">
                             <div class="candidato-grado"><div class="grado-icono gs"><span>4</span></div></div>
@@ -533,19 +468,19 @@
                         </div>
                         <div class="candidato-fila">
                             <div class="candidato-grado"><div class="grado-icono gs"><span>5</span></div></div>
-                            <div class="candidato-nombre">Proselitismo: **Prohibido** favorecer a algún candidato de alguna lista. Habrá denuncia al órgano correspondiente.</div>
+                            <div class="candidato-nombre">Proselitismo: **Prohibido** favorecer a algún candidato. Habrá denuncia al órgano correspondiente.</div>
                         </div>
                         <div class="candidato-fila">
                             <div class="candidato-grado"><div class="grado-icono gs"><span>6</span></div></div>
-                            <div class="candidato-nombre">Habilidad: Solo los hermanos y/o hermanas que se encuentran **hábiles** podrán ejercer su voto.</div>
+                            <div class="candidato-nombre">Habilidad: Solo hermanos **hábiles** podrán ingresar a las instalaciones a ejercer su voto.</div>
                         </div>
                         <div class="candidato-fila">
                             <div class="candidato-grado"><div class="grado-icono gs"><span>7</span></div></div>
-                            <div class="candidato-nombre">Secreto del voto: **Prohibido tomar una fotografía al voto**. Será denunciado al órgano disciplinario.</div>
+                            <div class="candidato-nombre">Secreto del voto: **Prohibido tomar una fotografía al voto**. Será denunciado.</div>
                         </div>
                         <div class="candidato-fila">
                             <div class="candidato-grado"><div class="grado-icono gs"><span>10</span></div></div>
-                            <div class="candidato-nombre">Celulares: **Prohibido el ingreso con celular prendido** desde el orden de ingreso hasta su salida.</div>
+                            <div class="candidato-nombre">Celulares: **Prohibido el ingreso con celular prendido** desde el orden de ingreso hasta la salida.</div>
                         </div>
                     </div>
                 </div>
@@ -574,21 +509,24 @@
                     <div class="candidato-fila" style="grid-template-columns: 80px 1fr; background-color: var(--color-secundario);">
                         <div class="candidato-grado"><div class="grado-icono gs"><span>9</span></div></div>
                         <div class="candidato-nombre">
-                            <strong>DISPENSAS:</strong> Los hermanos que por motivos de trabajo, viaje, incapacidad física, enfermedad, hospitalización, o FF.AA. en servicio, deberán llenar el **formato de dispensa oficial** adjuntando documentos sustentatorios. El trámite se hace a su cuadrilla, quien informará al Jurado Electoral **hasta un día antes** de las elecciones. En caso de emergencias, se presentará **hasta un día después** (para no ser sancionado en julio 2026).
+                            <strong>DISPENSAS:</strong> Los hermanos que por motivos de trabajo, viaje, incapacidad física, enfermedad, etc., deben llenar el **formato de dispensa oficial**. El trámite se hace a su cuadrilla, quien informará al Jurado Electoral **hasta un día antes** de las elecciones. En caso de emergencias, se presenta **hasta un día después**.
                             <br>
-                            *Las dispensas anuales presentadas en agosto 2025 (extranjero/provincias) para el año Carmelita 2026 se aceptarán, pero se deberán hacer llegar de igual manera.*
+                            *Las dispensas anuales (extranjero/provincias) presentadas en agosto 2025 para el año 2026 se aceptarán, pero se deberán hacer llegar de igual manera.*
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="contenedor-planes" style="margin-top: 40px; border-radius: 0 0 10px 10px; border: none;">
-               
+                <a href="#" class="btn-plan" onclick="simularDescarga(event)">
+                    <i class="fas fa-download"></i>
+                    Descargar Reglamento Electoral Completo (PDF)
+                </a>
             </div>
         </section>
 
         <footer class="pie-pagina">
-            <p>Décima Cuarta Cuadrilla - Proceso Electoral 2026-2028</p>
+            <p>Décima Cuarta Cuadrilla - Hermandad de la Santisima Virgen del Carmen de Lima</p>
             <p>&copy; 2025 | Jurado Electoral</p>
         </footer>
 
@@ -604,22 +542,21 @@
                 // Ocultar preloader
                 preloader.classList.add('hidden');
                 
-                // Mostrar contenido principal después de que el preloader comience a desvanecerse
+                // Mostrar contenido principal
                 setTimeout(function() {
                     content.classList.add('visible');
-                }, 100); // Pequeño retraso para asegurar que la transición de opacidad se aplique al contenedor
-            }, 3000); // Duración de 3 segundos para el preloader
+                }, 100);
+            }, 3000); // Duración de 3 segundos
         });
 
 
         // Función para simular la descarga y el efecto visual del botón
         function simularDescarga(event) {
-            event.preventDefault(); // Evita que el enlace navegue
+            event.preventDefault();
 
             const btn = event.currentTarget;
             const originalText = btn.innerHTML;
             
-            // Si ya está en estado de éxito, ignora el clic
             if (btn.classList.contains('download-complete')) {
                 return;
             }
@@ -637,25 +574,23 @@
 
             // 2. Cambiar a estado de descarga
             btn.innerHTML = '<i class="fas fa-sync-alt fa-spin"></i> Descargando...';
-            btn.style.pointerEvents = 'none'; // Deshabilitar clic durante la animación
+            btn.style.pointerEvents = 'none';
 
             // 3. Simular la finalización de la descarga y el efecto de éxito
             setTimeout(() => {
-                // Quitar el icono flotante después de que termine su animación
                 pdfIcon.remove();
 
-                // Aplicar el estilo de éxito
                 btn.classList.add('download-complete');
                 btn.innerHTML = '<i class="fas fa-check"></i> ¡Descarga Exitosa!';
 
-                // 4. Resetear el botón después de unos segundos
+                // 4. Resetear el botón
                 setTimeout(() => {
                     btn.classList.remove('download-complete');
                     btn.innerHTML = originalText;
-                    btn.style.pointerEvents = 'auto'; // Habilitar clic de nuevo
-                }, 4000); // 4 segundos en estado de éxito
+                    btn.style.pointerEvents = 'auto';
+                }, 4000);
 
-            }, 1500); // Simula el tiempo que tarda la descarga (debe coincidir con la animación flyOutPdf)
+            }, 1500); // Tiempo de animación flyOutPdf
         }
     </script>
 
