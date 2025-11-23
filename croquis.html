@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ubicación de Mesas - Diseño Final Separado</title>
+    <title>Ubicación de Mesas - Diseño Final, Altura Reducida</title>
     <style>
         /* Paleta de Colores: Marrón, Crema, Blanco y Acentos */
         :root {
@@ -15,7 +15,12 @@
             --color-acento-oscuro: #8D6E63;
             --color-ingreso: #4CAF50;
             --color-salida: #F44336;
-            --gap: 5px; /* Define el espacio de separación */
+            --gap: 5px; /* Espacio de separación entre elementos */
+            
+            /* NUEVAS DIMENSIONES CLAVE */
+            --plano-height: 595px; /* 700px * 0.85 */
+            --area-top-height: 60px; /* Reducción de 70px */
+            --area-bottom-top: 350px; /* Posición de inicio de la franja inferior */
         }
 
         body {
@@ -48,9 +53,8 @@
         }
 
         .plano {
-            /* Dejamos un espacio de 10px en total a los lados para el gap */
             width: calc(100% - var(--gap) * 2); 
-            height: 700px;
+            height: var(--plano-height); /* Altura reducida */
             position: relative;
             border: 1px solid #E0E0E0;
             margin: var(--gap);
@@ -81,66 +85,73 @@
         .color-oratorio { background: linear-gradient(to bottom right, #D2B48C, #C9A98A); }
         .color-office { background-color: #E0E0E0; }
 
-        /* --- CÁLCULOS DE ANCHOS Y POSICIONES CON GAP (18% + GAP + 30% + GAP + 30% + GAP + 18%) --- */
-        
-        /* Definición de Anchos y Margen */
+        /* --- 1. ESTRUCTURA SUPERIOR --- */
+        .sshh, .bar-cafe { 
+            height: var(--area-top-height); /* Altura reducida */
+            top: 10px; 
+        }
+
         .w-sshh { width: 18%; }
         .w-bar-cafe { width: 30%; }
-        .w-scarrasco { width: 25%; }
-        .w-fiscalia { width: 18%; }
-        .w-ingreso { width: 34%; }
-        .w-jurado { width: 20%; }
-        
-        /* --- 1. ESTRUCTURA SUPERIOR --- */
-        .sshh { height: 70px; top: 10px; }
-        .bar-cafe { height: 70px; top: 10px; }
 
         .sshh-cab { left: 0; }
-        .bar { left: calc(18% + var(--gap)); } /* 18% + 5px */
-        .cafeteria { left: calc(18% + 30% + var(--gap) * 2); } /* 18% + 30% + 10px */
+        .bar { left: calc(18% + var(--gap)); }
+        .cafeteria { left: calc(18% + 30% + var(--gap) * 2); }
         .sshh-damas { right: 0; }
-        
-        /* --- 2. MESAS --- (Posicionamiento ajustado al nuevo plano) */
-        .mesa { z-index: 10; padding: 8px 10px; font-size: 0.55em; border-radius: 5px; box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25); }
-        .mesa-derecha::after { right: -12px; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 12px solid; }
-        .mesa-izquierda::after { left: -12px; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-right: 12px solid; }
-        
-        /* Mesas Izquierdas */
-        .mesa-4 { top: 140px; left: 0; width: 150px; height: 35px; }
-        .mesa-3 { top: 200px; left: 0; width: 150px; height: 35px; }
-        .mesa-2 { top: 260px; left: 0; width: 150px; height: 35px; }
-        /* Mesas Derechas */
-        .mesa-5 { top: 140px; right: 0; width: 150px; height: 35px; }
-        .mesa-1 { top: 260px; right: 0; width: 150px; height: 35px; }
-        
-        /* --- 3. ESTRUCTURA INFERIOR --- */
-        .inferior { top: 400px; height: 280px; margin-top: 10px; }
 
-        /* Posicionamiento y anchos recalculados con gaps */
+        /* --- 2. MESAS --- */
+        .mesa { z-index: 10; padding: 8px 10px; font-size: 0.55em; border-radius: 5px; box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25); }
+        
+        /* Posicionamiento Vertical Ajustado */
+        .mesa-4 { top: 110px; left: 0; width: 150px; height: 30px; } /* Reducción de 140px a 110px, 35px a 30px */
+        .mesa-3 { top: 160px; left: 0; width: 150px; height: 30px; }
+        .mesa-2 { top: 210px; left: 0; width: 150px; height: 30px; }
+        .mesa-5 { top: 110px; right: 0; width: 150px; height: 30px; }
+        .mesa-1 { top: 210px; right: 0; width: 150px; height: 30px; }
+        
+        /* Flechas (tamaño ajustado a la mesa más pequeña) */
+        .mesa-derecha::after { right: -10px; border-top: 8px solid transparent; border-bottom: 8px solid transparent; border-left: 10px solid; }
+        .mesa-izquierda::after { left: -10px; border-top: 8px solid transparent; border-bottom: 8px solid transparent; border-right: 10px solid; }
+        
+        /* Colores y Degradados de Mesas */
+        .mesa-4, .mesa-5 { background: linear-gradient(135deg, var(--color-acento-claro), #C0C0C0); }
+        .mesa-4::after { border-left-color: #C0C0C0; }
+        .mesa-5::after { border-right-color: #C0C0C0; }
+        .mesa-3 { background: linear-gradient(135deg, var(--color-acento-oscuro), #795548); color: var(--color-blanco); }
+        .mesa-3::after { border-left-color: #795548; }
+        .mesa-2 { background: linear-gradient(135deg, #BCAAA4, #A1887F); }
+        .mesa-2::after { border-left-color: #A1887F; }
+        .mesa-1 { background: linear-gradient(135deg, var(--color-marrondark), #211A1A); color: var(--color-blanco); }
+        .mesa-1::after { border-right-color: #211A1A; }
+
+
+        /* --- 3. ESTRUCTURA INFERIOR (Posiciones y Alturas Recalculadas) --- */
+        .inferior { top: var(--area-bottom-top); height: calc(var(--plano-height) - var(--area-bottom-top) - 10px); margin-top: 10px; } /* Altura dinámica */
+
+        .w-scarrasco { width: 25%; }
+        .w-fiscalia { width: 18%; }
+        .w-jurado { width: 20%; }
         
         /* Salón Carrasco */
         .salon-carrasco { left: 0; }
         
-        /* Fiscalía y Salón Virgen */
-        .fiscalia { left: calc(25% + var(--gap)); }
-        .salon-virgen { left: calc(25% + var(--gap)); top: 500px; height: 180px; }
+        /* Fiscalía y S. Virgen del Carmen */
+        .fiscalia { left: calc(25% + var(--gap)); height: 80px; } /* Altura reducida */
+        .salon-virgen { left: calc(25% + var(--gap)); top: calc(var(--area-bottom-top) + 90px); height: 160px; } /* Posición y Altura recalculadas */
         
         /* Jurado/Oratorio (Pegado a la derecha) */
-        .jurado { right: 0; height: 130px; top: 400px; }
-        .oratorio { right: 0; height: 130px; top: 550px; }
+        .jurado { right: 0; height: 120px; top: var(--area-bottom-top); } /* Altura reducida */
+        .oratorio { right: 0; height: 120px; top: calc(var(--area-bottom-top) + 130px); } /* Posición recalculada */
         
-        /* Ingreso/Salida BOX (Expandido entre S. Virgen del Carmen y Jurado) */
+        /* Ingreso/Salida BOX (Expandido) */
         .ingreso-salida-box { 
-            left: calc(25% + 18% + var(--gap) * 2); /* Posición: Carrasco + gap + Fiscalía + gap */
-            /* Ancho: 100% - (25% + 18% + 20%) - 4*gap */
+            left: calc(25% + 18% + var(--gap) * 2);
             width: calc(100% - 25% - 18% - 20% - var(--gap) * 3);
-            height: 280px; 
+            height: calc(var(--plano-height) - var(--area-bottom-top) - 10px);
         } 
 
         /* Alturas */
-        .salon-carrasco, .ingreso-salida-box { height: 280px; }
-        .fiscalia { height: 90px; }
-        .jurado, .oratorio { height: 130px; }
+        .salon-carrasco, .ingreso-salida-box { height: calc(var(--plano-height) - var(--area-bottom-top) - 10px); }
         
         /* Flechas de Ingreso/Salida */
         .ingreso-salida-box { display: flex; flex-direction: column; align-items: center; justify-content: space-around; padding: 0; }
