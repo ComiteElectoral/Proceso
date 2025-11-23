@@ -99,15 +99,16 @@
         .header {
             display: flex;
             align-items: center;
-            justify-content: center; /* Centra los elementos */
-            gap: 20px; /* Espacio entre logos y título */
+            justify-content: space-between; /* Distribuye espacio entre logos y título */
+            gap: 15px; /* Espacio entre los elementos */
             margin-bottom: 25px;
-            flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
+            /* No flex-wrap aquí, manejaremos la reducción de tamaño de los logos */
         }
 
         .logo {
             width: 100px; /* Tamaño de los logos */
             height: auto;
+            flex-shrink: 0; /* No permite que el logo se encoja inicialmente */
             border-radius: 50%; /* Si son circulares */
             box-shadow: var(--shadow-subtle);
             border: 2px solid var(--color-dorado-accent);
@@ -119,6 +120,7 @@
             color: var(--color-marrondark);
             margin: 0;
             line-height: 1.1;
+            flex-grow: 1; /* Permite que el título ocupe el espacio central */
             /* Degradado de texto para un efecto premium */
             background: linear-gradient(to right, var(--color-marrondark), #6E5F52);
             -webkit-background-clip: text;
@@ -208,7 +210,7 @@
         }
 
         /* ---------------------------------
-           RESPONSIVIDAD
+           RESPONSIVIDAD (AJUSTADA)
         --------------------------------- */
         @media (max-width: 768px) {
             .main-container {
@@ -219,7 +221,7 @@
                 padding: 20px;
             }
             .main-title {
-                font-size: 2em;
+                font-size: 2.2em; /* Título un poco más pequeño */
             }
             .event-date {
                 font-size: 1.5em;
@@ -227,12 +229,12 @@
             .event-time {
                 font-size: 1.2em;
             }
-            .header {
-                flex-direction: column;
-                gap: 15px;
-            }
+            /* Ajuste de logos para que quepan */
             .logo {
-                width: 80px;
+                width: 70px; /* Reducir tamaño del logo en pantallas medianas */
+            }
+            .header {
+                gap: 10px; /* Reducir espacio entre elementos */
             }
             .map-container {
                 height: 250px;
@@ -244,19 +246,23 @@
                 padding: 15px;
             }
             .main-title {
-                font-size: 1.8em;
+                font-size: 1.6em; /* Título aún más pequeño */
             }
             .logo {
-                width: 70px;
+                width: 50px; /* Logos más pequeños en móviles */
+                border-width: 1px; /* Borde más fino */
+            }
+            .header {
+                gap: 8px; /* Espacio mínimo */
             }
             .event-date {
-                font-size: 1.3em;
+                font-size: 1.2em;
             }
             .event-time {
-                font-size: 1.1em;
+                font-size: 1em;
             }
             .location-address {
-                font-size: 1em;
+                font-size: 0.9em;
             }
         }
     </style>
@@ -271,11 +277,11 @@
 
     <div class="content">
         <header class="header">
-            <img src="https://edwinhsvcl14-maker.github.io/asistencias/logo_hermandad.png" alt="Insignia Izquierda" class="logo logo-left">
+            <img src="https://via.placeholder.com/100x100/4A3C2F/FFD700?text=Logo+Izq" alt="Insignia Izquierda" class="logo logo-left">
             
             <h1 class="main-title">ELECCIONES GENERALES HSVCL</h1>
             
-            <img src="https://14CuadrillaHSVCL.github.io/Proceso/14c.png" alt="Insignia Derecha" class="logo logo-right">
+            <img src="https://via.placeholder.com/100x100/4A3C2F/FFD700?text=Logo+Der" alt="Insignia Derecha" class="logo logo-right">
         </header>
 
         <section class="event-info">
@@ -299,13 +305,10 @@
         </section>
 
         <footer class="footer">
-            <p>&copy; 2023 Hermandad de la Virgen del Carmen. Todos los derechos reservados.</p>
+            <p>© 2023 Hermandad de la Virgen del Carmen. Todos los derechos reservados.</p>
         </footer>
     </div>
 </div>
 
 </body>
 </html>
-
-
-
