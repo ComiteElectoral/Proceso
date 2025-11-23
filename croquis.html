@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ubicación de Mesas por Cuadrillas y Grupos - Diseño Profesional</title>
+    <style>
+        /* Paleta de Colores: Marrón, Crema y Blanco */
+        :root {
+            --color-marrondark: #4A3A35;  /* Para contornos y texto principal */
+            --color-marronsuave: #8D6E63; /* Para áreas principales y 3D */
+            --color-crema: #F5F5DC;      /* Fondo de áreas comunes */
+            --color-blanco: #FFFFFF;     /* Fondo principal y mesas */
+            --color-dorado: #C9A98A;     /* Acento para Mesas y Título */
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--color-crema);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .croquis-container {
+            width: 800px;
+            padding: 30px;
+            border-radius: 15px;
+            background: linear-gradient(145deg, var(--color-blanco), #F5EFE1); /* Ligeramente degradado */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 5px solid var(--color-marronsuave);
+        }
+
+        .titulo {
+            text-align: center;
+            font-size: 1.8em;
+            font-weight: bold;
+            color: var(--color-marrondark);
+            margin-bottom: 25px;
+            border-bottom: 3px solid var(--color-dorado);
+            padding-bottom: 10px;
+        }
+
+        /* Estructura del Plano */
+        .plano {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr; /* Adaptado a la distribución del croquis */
+            grid-template-rows: auto auto auto auto auto;
+            gap: 5px;
+            position: relative;
+        }
+
+        .area {
+            border: 2px solid var(--color-marrondark);
+            padding: 5px;
+            text-align: center;
+            font-size: 0.75em;
+            font-weight: bold;
+            color: var(--color-marrondark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .texto-vertical {
+            transform: rotate(-90deg);
+            white-space: nowrap;
+        }
+
+        /* Colores Específicos de las Áreas y 3D Effect */
+        .bar, .cafeteria { background-color: var(--color-crema); }
+        .sshh { background-color: #E6E6DC; font-size: 0.6em; }
+        .salon { background-color: #D2B48C; } /* Tonalidad de Marrón claro */
+        .oratorio { background-color: #B8860B; color: var(--color-blanco); } /* Tonalidad dorada */
+        .fiscalia { background-color: #C0C0C0; }
+        .jurado { background-color: var(--color-blanco); }
+
+        /* Mesas */
+        .mesa {
+            z-index: 10;
+            padding: 8px 10px;
+            border-radius: 5px;
+            margin: 5px;
+            font-size: 0.65em;
+            text-align: left;
+            box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2); /* Sutil 3D */
+            position: absolute; /* Para posicionamiento exacto */
+        }
+
+        /* Definición de colores de Mesas con degradados */
+        .mesa-1 { 
+            background: linear-gradient(135deg, #E9967A, #C05E44); /* Salmón/Marrón rojizo */
+            color: var(--color-blanco); 
+            top: 200px; left: 60%; 
+            width: 150px; height: 35px;
+        }
+        .mesa-2 { 
+            background: linear-gradient(135deg, #B0C4DE, #778899); /* Azul Pálido/Gris Azulado */
+            color: var(--color-marrondark); 
+            top: 250px; left: 15%; 
+            width: 150px; height: 35px;
+        }
+        .mesa-3 { 
+            background: linear-gradient(135deg, #DEB887, #A08365); /* Dorado/Ocre */
+            color: var(--color-marrondark); 
+            top: 200px; left: 15%; 
+            width: 150px; height: 35px;
+        }
+        .mesa-4 { 
+            background: linear-gradient(135deg, #F0E68C, #BDB76B); /* Amarillo Pálido/Verde Olivo */
+            color: var(--color-marrondark); 
+            top: 150px; left: 15%; 
+            width: 150px; height: 35px;
+        }
+        .mesa-5 { 
+            background: linear-gradient(135deg, #FFD700, #DAA520); /* Dorado Intenso/Marrón Dorado */
+            color: var(--color-marrondark); 
+            top: 150px; left: 60%; 
+            width: 150px; height: 35px;
+        }
+
+        /* Geometría y Posicionamiento (Ajuste basado en la imagen original) */
+        .bar { grid-area: 1 / 1 / 2 / 3; height: 50px; }
+        .cafeteria { grid-area: 1 / 3 / 2 / 5; height: 50px; }
+        
+        .sshh-cab { grid-area: 1 / 1 / 2 / 1; width: 40px; margin-right: auto; }
+        .sshh-damas { grid-area: 1 / 4 / 2 / 5; width: 40px; margin-left: auto; }
+
+        .salon-carrasco { grid-area: 4 / 1 / 5 / 2; height: 100px; margin-top: 10px; }
+        .salon-virgen { grid-area: 5 / 1 / 6 / 2; height: 50px; margin-top: 10px; }
+        .fiscalia { grid-area: 4 / 2 / 5 / 3; height: 50px; margin-top: 10px; }
+        
+        .ingreso { 
+            grid-area: 4 / 3 / 6 / 4; 
+            background: linear-gradient(to bottom, #A9A9A9, #808080); /* Degradado gris/marrón para la entrada */
+            color: var(--color-blanco);
+            height: 160px;
+            margin-top: 10px;
+            font-weight: bold;
+            font-size: 0.8em;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+        
+        .jurado { grid-area: 4 / 4 / 5 / 5; height: 50px; margin-top: 10px; }
+        .oratorio { grid-area: 5 / 4 / 6 / 5; height: 100px; margin-top: 10px; }
+
+        /* Mesas con flechas (usando pseudo-elementos CSS para la forma de flecha) */
+        .mesa::after {
+            content: '';
+            position: absolute;
+            right: -15px; /* Ajuste para que la punta se vea al lado */
+            top: 50%;
+            transform: translateY(-50%);
+            border-top: 18px solid transparent;
+            border-bottom: 18px solid transparent;
+            border-left: 15px solid; /* Define el color de la flecha */
+        }
+        .mesa-1::after { border-left-color: #C05E44; }
+        .mesa-2::after { border-left-color: #778899; }
+        .mesa-3::after { border-left-color: #A08365; }
+        .mesa-4::after { border-left-color: #BDB76B; }
+        .mesa-5::after { border-left-color: #DAA520; }
+
+
+    </style>
+</head>
+<body>
+
+<div class="croquis-container">
+    <div class="titulo">UBICACIÓN DE MESAS POR CUADRILLAS Y GRUPOS</div>
+
+    <div class="plano">
+        <div class="area sshh sshh-cab">SS. HH. CABALLEROS</div>
+        <div class="area bar">BAR</div>
+        <div class="area cafeteria">CAFETERÍA</div>
+        <div class="area sshh sshh-damas">SS. HH. DAMAS</div>
+        
+        <div class="area salon salon-carrasco" style="grid-row: 4 / 6; grid-column: 1 / 2; height: 165px; margin-top: 5px;">SALÓN CARRASCO</div>
+        
+        <div class="area fiscalia" style="grid-row: 4 / 5; grid-column: 2 / 3; height: 45px; margin-top: 5px;">FISCALÍA</div>
+        <div class="area salon salon-virgen" style="grid-row: 5 / 6; grid-column: 2 / 3; height: 115px; margin-top: 5px;">SALÓN VIRGEN DEL CARMEN</div>
+        
+        <div class="area ingreso" style="grid-row: 4 / 6; grid-column: 3 / 4; height: 165px; margin-top: 5px;">
+            <div>&uarr;</div>
+            <div style="font-size: 1.2em;">INGRESO Y SALIDA</div>
+            <div>&darr;</div>
+        </div>
+        
+        <div class="area jurado" style="grid-row: 4 / 5; grid-column: 4 / 5; height: 45px; margin-top: 5px;">JURADO ELECTORAL</div>
+        <div class="area oratorio" style="grid-row: 5 / 6; grid-column: 4 / 5; height: 115px; margin-top: 5px;">ORATORIO</div>
+
+
+        <div class="mesa mesa-1" style="top: 250px; left: 550px;">
+            MESA N° 1 <br>
+            CUADRILLA 1 <br>
+            **SAHUMADORAS**
+        </div>
+        
+        <div class="mesa mesa-5" style="top: 150px; left: 550px;">
+            MESA N° 5 <br>
+            CUADRILLAS <br>
+            17 - 18 - 19 - 20 <br>
+            **CANTORAS**
+        </div>
+        
+        <div class="mesa mesa-4" style="top: 150px; left: 150px;">
+            MESA N° 4 <br>
+            CUADRILLAS <br>
+            13 - 14 - 15 - 16
+        </div>
+
+        <div class="mesa mesa-3" style="top: 200px; left: 150px;">
+            MESA N° 3 <br>
+            CUADRILLAS <br>
+            9 - 10 - 11 - 12
+        </div>
+
+        <div class="mesa mesa-2" style="top: 250px; left: 150px;">
+            MESA N° 2 <br>
+            CUADRILLAS <br>
+            5 - 6 - 7 - 8
+        </div>
+        
+    </div>
+</div>
+
+</body>
+</html>
