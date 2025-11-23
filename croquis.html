@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ubicación de Mesas - DISEÑO FINAL DE COLOR Y SIN BORDES</title>
+    <title>Ubicación de Mesas - ESTRUCTURA PERFECTA + CAMBIOS DE COLOR/BORDE</title>
     <style>
         /* Paleta de Colores: Marrón, Crema, Blanco y Acentos */
         :root {
@@ -31,15 +31,6 @@
             --bottom-strip-usable-height: calc(var(--bottom-strip-available-height) - 10px);
             --stacked-top-height: 75px; 
             --stacked-bottom-height: calc(var(--bottom-strip-usable-height) - var(--stacked-top-height) - var(--gap));
-            
-            /* Degradado de la franja superior */
-            --top-gradient: linear-gradient(to right, 
-                #8D6E63 0%, /* Marrón Suave para los extremos (Baños) */
-                #A1887F 25%, /* Ligeramente más claro en Bar */
-                #BCAAA4 50%, /* Tono neutro en Cafetería (Centro) */
-                #A1887F 75%, /* Ligeramente más claro en Bar/Cafetería derecho */
-                #8D6E63 100% /* Marrón Suave para el extremo (Baño) */
-            );
         }
 
         body {
@@ -80,9 +71,8 @@
             overflow: hidden; 
         }
 
-        /* --- 0. ELIMINACIÓN DE BORDES Y SOMBRAS --- */
+        /* --- 0. ELIMINACIÓN DE BORDES Y SOMBRAS DE TODOS LOS RECUADROS --- */
         .area, .mesa, .recuadro {
-            /* ¡QUITAR BORDES Y SOMBRAS DE TODOS LOS ELEMENTOS! */
             border: none !important; 
             box-shadow: none !important; 
         }
@@ -102,37 +92,35 @@
             padding: 3px;
         }
         
-        /* Colores y Degradados (Se redefinen solo para los tonos base que se usan en las mesas y áreas inferiores) */
+        /* --- COLORES Y DEGRADADOS (AJUSTADOS PARA NO BORDER) --- */
         .color-salon { background: linear-gradient(to bottom right, #A0522D, #8B4513); color: var(--color-blanco); }
         .color-oratorio { background: linear-gradient(to bottom right, #D2B48C, #C9A98A); }
         .color-office { background-color: #E0E0E0; }
 
-        /* --- 1. ESTRUCTURA SUPERIOR (DEGRADADO HORIZONTAL) --- */
-        .franja-superior {
-            position: absolute;
-            top: 5px;
-            left: 0;
-            width: 100%;
-            height: var(--area-top-height);
-            /* APLICAR EL DEGRADADO PRINCIPAL AL CONTENEDOR DE LA FRANJA */
-            background: var(--top-gradient);
-            border-radius: 8px;
+        /* --- FRANJA SUPERIOR: DEGRADADO MARRÓN EN CADA RECUADRO --- */
+        .sshh { 
+            background: linear-gradient(to right, #8D6E63, #A1887F); 
+            color: var(--color-blanco);
+        }
+        .bar-cafe { 
+            background: linear-gradient(to right, #A1887F, #BCAAA4); 
+            color: var(--color-marrondark);
         }
 
-        /* Los elementos individuales ahora se posicionan sobre el degradado */
-        .sshh, .bar-cafe { height: var(--area-top-height); top: 0; position: absolute; } 
-        
-        /* El texto necesita un fondo transparente para que se vea el degradado del padre */
-        .area-transparente { background-color: transparent !important; }
-
+        /* --- 1. ESTRUCTURA SUPERIOR (POSICIONAMIENTO RESTAURADO) --- */
+        .sshh, .bar-cafe { height: var(--area-top-height); top: 5px; }
         .w-sshh { width: 18%; }
         .w-bar-cafe { width: 30%; }
         .sshh-cab { left: 0; }
         .bar { left: calc(18% + var(--gap)); }
         .cafeteria { left: calc(18% + 30% + var(--gap) * 2); }
         .sshh-damas { right: 0; }
+        
+        /* Corrección de colores de texto para los extremos más oscuros */
+        .sshh-cab, .sshh-damas { color: var(--color-blanco); }
 
-        /* --- 2. MESAS (ALTURA DOBLE y POSICIÓN SIMÉTRICA) --- */
+
+        /* --- 2. MESAS (ALTURA DOBLE y POSICIÓN SIMÉTRICA RESTAURADA) --- */
         .mesa { 
             z-index: 10; 
             padding: 6px 8px; 
@@ -150,7 +138,7 @@
         .mesa-2 { top: 229px; left: 0; } 
         .mesa-1 { top: 229px; right: 0; }
         
-        /* Estilo de la flecha - Aumentar tamaño para mejor visibilidad sin borde */
+        /* Estilo de la flecha - Mantenido */
         .mesa::after {
             content: '';
             position: absolute;
@@ -165,7 +153,7 @@
         .mesa-derecha::after { right: -15px; border-left: 15px solid; } 
         .mesa-izquierda::after { left: -15px; border-right: 15px solid; } 
 
-        /* Colores y Degradados de Mesas */
+        /* Colores y Degradados de Mesas (Mantenidos) */
         .mesa-4, .mesa-5 { background: linear-gradient(135deg, var(--color-acento-claro), #C0C0C0); color: var(--color-marrondark); }
         .mesa-4::after { border-right-color: #C0C0C0; }
         .mesa-5::after { border-left-color: #C0C0C0; }
@@ -180,7 +168,7 @@
         .mesa-1::after { border-left-color: #211A1A; }
 
 
-        /* --- 3. FRANA INFERIOR (FLEXBOX - MANTENER ESTABILIDAD) --- */
+        /* --- 3. FRANA INFERIOR (FLEXBOX - ESTABLE RESTAURADO) --- */
         .franja-inferior {
             position: absolute;
             top: var(--area-bottom-top); 
@@ -229,8 +217,8 @@
         .recuadro-bottom { flex-grow: 1; } 
 
         /* Estilos para Ingreso/Salida */
-        .ingreso-salida-box { display: flex; flex-direction: column; align-items: center; justify-content: space-around; padding: 0; }
-        .flecha { font-size: 1.8em; font-weight: 900; text-shadow: 0 0 5px rgba(0,0,0,0.5); line-height: 1; }
+        .ingreso-salida-box { display: flex; flex-direction: column; align-items: center; justify-content: space-around; padding: 0; background-color: var(--color-crema); }
+        .flecha { font-size: 1.8em; font-weight: 900; text-shadow: 0 0 5px rgba(0,0,0,0.2); line-height: 1; }
         .ingreso-salida-box .label-io {
             display: flex; width: 100%; justify-content: space-around; align-items: center; text-align: center; padding: 5px 0; margin-top: 5px;
         }
@@ -240,16 +228,12 @@
 
 <div class="croquis-container">
     <div class="titulo">UBICACIÓN DE MESAS POR CUADRILLAS Y GRUPOS</div>
-    
-    
 
     <div class="plano">
-        <div class="franja-superior">
-            <div class="area area-transparente sshh sshh-cab w-sshh">SS. HH. CABALLEROS</div>
-            <div class="area area-transparente bar-cafe bar w-bar-cafe">BAR</div>
-            <div class="area area-transparente bar-cafe cafeteria w-bar-cafe">CAFETERÍA</div>
-            <div class="area area-transparente sshh sshh-damas w-sshh">SS. HH. DAMAS</div>
-        </div>
+        <div class="area sshh sshh-cab w-sshh">SS. HH. CABALLEROS</div>
+        <div class="area bar-cafe bar w-bar-cafe">BAR</div>
+        <div class="area bar-cafe cafeteria w-bar-cafe">CAFETERÍA</div>
+        <div class="area sshh sshh-damas w-sshh">SS. HH. DAMAS</div>
         
         <div class="mesa mesa-izquierda mesa-4" style="background: linear-gradient(135deg, var(--color-acento-claro), #C0C0C0);">MESA N° 4 <br> CUADRILLAS 13 - 14 - 15 - 16</div>
         <div class="mesa mesa-izquierda mesa-3" style="background: linear-gradient(135deg, var(--color-acento-oscuro), #795548); color: var(--color-blanco);">MESA N° 3 <br> CUADRILLAS 9 - 10 - 11 - 12</div>
@@ -269,7 +253,7 @@
             </div>
             
             <div class="columna columna-3">
-                <div class="recuadro recuadro-full ingreso-salida-box" style="background-color: var(--color-crema);">
+                <div class="recuadro recuadro-full ingreso-salida-box">
                     <div class="label-io">
                         <div class="flecha flecha-salida" style="color: var(--color-salida);">&darr;</div>
                         <div style="color: var(--color-marrondark); font-weight: 700;">SALIDA</div>
