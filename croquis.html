@@ -3,19 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ubicación de Mesas por Cuadrillas y Grupos - Diseño Corregido</title>
+    <title>Ubicación de Mesas - Diseño 3D Profesional (Versión Final)</title>
     <style>
-        /* Paleta de Colores: Marrón, Crema y Blanco */
+        /* Paleta de Colores: Marrón, Crema, Blanco y Acentos */
         :root {
-            --color-marrondark: #4A3A35;    /* Contornos y texto principal */
-            --color-marronsuave: #8D6E63;   /* Sombra y áreas de salones */
-            --color-crema: #F5F5DC;         /* Fondo de áreas comunes */
-            --color-blanco: #FFFFFF;        /* Fondo principal y mesas */
-            --color-acento: #C9A98A;        /* Marrón Dorado para Mesas */
+            --color-marrondark: #3E2723;    /* Contornos y texto principal */
+            --color-marronsuave: #6D4C41;   /* Sombra y áreas de salones */
+            --color-crema: #FCF9F5;         /* Fondo de áreas comunes (casi blanco) */
+            --color-blanco: #FFFFFF;        /* Fondo principal */
+            --color-acento-claro: #D7CCC8;  /* Tonalidad de Crema/Bronce para Mesas */
+            --color-acento-oscuro: #8D6E63; /* Tonalidad Marrón para Mesas */
+            --color-ingreso: #4CAF50;       /* Verde para Ingreso */
+            --color-salida: #F44336;        /* Rojo para Salida */
         }
 
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Montserrat', sans-serif; /* Fuente moderna y profesional */
             background-color: var(--color-crema);
             display: flex;
             justify-content: center;
@@ -26,69 +29,81 @@
         }
 
         .croquis-container {
-            width: 900px;
-            padding: 30px;
-            border-radius: 15px;
-            background: linear-gradient(145deg, var(--color-blanco), #F5EFE1);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            border: 5px solid var(--color-marronsuave);
+            width: 950px;
+            padding: 35px;
+            border-radius: 18px;
+            /* Degradado de fondo elegante */
+            background: linear-gradient(135deg, var(--color-blanco) 0%, #F5F5F5 100%);
+            /* Sombra suave y profunda (efecto 3D para el marco) */
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            border: 6px solid var(--color-marrondark);
         }
 
         .titulo {
             text-align: center;
-            font-size: 1.8em;
-            font-weight: bold;
+            font-size: 2.2em;
+            font-weight: 800; /* Extra Bold */
             color: var(--color-marrondark);
-            margin-bottom: 25px;
-            border-bottom: 3px solid var(--color-acento);
-            padding-bottom: 10px;
+            margin-bottom: 30px;
+            /* Efecto de texto semi-3D */
+            text-shadow: 1px 1px 0 var(--color-marronsuave);
         }
 
-        /* Contenedor principal que simula el plano */
         .plano {
             width: 100%;
-            height: 500px; /* Altura fija para controlar la distribución */
+            height: 550px; 
             position: relative;
-            border: 2px solid var(--color-marrondark);
+            border: 1px solid #E0E0E0; /* Borde interno muy sutil */
         }
 
         .area {
             position: absolute;
             border: 1px solid var(--color-marrondark);
-            padding: 5px;
             text-align: center;
-            font-size: 0.7em;
-            font-weight: bold;
+            font-size: 0.8em;
+            font-weight: 600;
             color: var(--color-marrondark);
             display: flex;
             justify-content: center;
             align-items: center;
             box-sizing: border-box;
-            box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); /* Sutil 3D */
+            /* Efecto 3D de levantamiento sutil */
+            box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.15); 
+            background: var(--color-crema);
         }
 
-        /* Colores de las Áreas */
-        .color-cafe { background-color: #EDECE4; } /* Crema suave */
-        .color-salon { background-color: #D2B48C; color: var(--color-marrondark); } /* Marrón claro */
-        .color-oratorio { background-color: #A0522D; color: var(--color-blanco); } /* Marrón oscuro */
-        .color-office { background-color: #E0E0E0; } /* Gris/Blanco */
-        .color-sshh { background-color: #C8C8B9; font-size: 0.6em; }
+        /* Colores Específicos para Áreas */
+        .color-cafe { background: linear-gradient(to bottom, #F9F9F9, #EFEFEF); }
+        .color-salon { background: linear-gradient(to bottom right, #A0522D, #8B4513); color: var(--color-blanco); } /* Marrón Fuerte */
+        .color-oratorio { background: linear-gradient(to bottom right, #D2B48C, #C9A98A); } /* Dorado/Bronce */
+        .color-office { background-color: #E0E0E0; }
+        .color-sshh { background-color: #CAC2B7; font-size: 0.7em; }
 
-        /* Estilos de Mesas (Flechas) */
+        /* --- 1. AJUSTES DE ESTRUCTURA SUPERIOR --- */
+        .sshh { height: 60px; top: 10px; }
+        .bar-cafe { height: 60px; top: 10px; }
+
+        /* Baños y Áreas Superiores cubriendo el 100% */
+        .sshh-cab { left: 10px; width: 15%; } /* Alargado */
+        .bar { left: 15.5%; width: 33%; }
+        .cafeteria { left: 49.5%; width: 33%; }
+        .sshh-damas { right: 10px; width: 15%; } /* Alargado */
+
+        /* --- 2. AJUSTES DE MESAS (Flechas Invertidas Derecha) --- */
         .mesa {
             z-index: 10;
-            padding: 8px 10px;
+            padding: 10px 12px;
             border-radius: 5px;
-            font-size: 0.6em;
+            font-size: 0.65em;
             text-align: left;
-            box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25); 
             color: var(--color-marrondark);
             position: absolute;
-            background-color: var(--color-acento); /* Marrón Dorado */
+            background-color: var(--color-acento-claro);
         }
 
-        /* Estilos para que parezca una flecha */
-        .mesa::after {
+        /* Flecha apuntando a la DERECHA (Mesas Izquierdas) */
+        .mesa-derecha::after {
             content: '';
             position: absolute;
             right: -15px;
@@ -96,21 +111,64 @@
             transform: translateY(-50%);
             border-top: 15px solid transparent;
             border-bottom: 15px solid transparent;
-            border-left: 15px solid var(--color-acento); /* Color de la punta de flecha */
-            z-index: 9;
+            border-left: 15px solid; 
+        }
+
+        /* Flecha apuntando a la IZQUIERDA (Mesas Derechas - Invertidas) */
+        .mesa-izquierda::after {
+            content: '';
+            position: absolute;
+            left: -15px; /* Sale por la izquierda */
+            top: 50%;
+            transform: translateY(-50%);
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-right: 15px solid; /* La punta es el borde derecho */
         }
         
-        /* Ajuste de colores específicos para distinguir las mesas (usando tonalidades de Marrón/Dorado) */
-        .mesa-1 { background-color: #8B4513; color: var(--color-blanco); } /* Marrón chocolate */
-        .mesa-1::after { border-left-color: #8B4513; }
-        .mesa-5 { background-color: #DAA520; } /* Dorado Intenso */
-        .mesa-5::after { border-left-color: #DAA520; }
-        .mesa-4 { background-color: #D2B48C; } /* Bronce */
-        .mesa-4::after { border-left-color: #D2B48C; }
-        .mesa-3 { background-color: #C9A98A; } /* Marrón Claro */
-        .mesa-3::after { border-left-color: #C9A98A; }
-        .mesa-2 { background-color: #A0522D; color: var(--color-blanco); } /* Marrón Óxido */
-        .mesa-2::after { border-left-color: #A0522D; }
+        /* Colores de Mesas (Mesa 4 y 5 iguales, 2 y 3 diferenciadas) */
+        .mesa-4, .mesa-5 { background-color: var(--color-acento-claro); }
+        .mesa-4::after { border-left-color: var(--color-acento-claro); }
+        .mesa-5::after { border-right-color: var(--color-acento-claro); }
+        
+        .mesa-3 { background-color: var(--color-acento-oscuro); color: var(--color-blanco); }
+        .mesa-3::after { border-left-color: var(--color-acento-oscuro); }
+
+        .mesa-2 { background-color: #BCAAA4; } /* Gris/Marrón más frío */
+        .mesa-2::after { border-left-color: #BCAAA4; }
+
+        .mesa-1 { background-color: var(--color-marrondark); color: var(--color-blanco); }
+        .mesa-1::after { border-right-color: var(--color-marrondark); }
+
+
+        /* --- 3. AJUSTES DE ESTRUCTURA INFERIOR --- */
+        .inferior { top: 350px; height: 160px; margin-top: 10px; }
+
+        /* Ajuste de anchos para cubrir el 100% de la franja */
+        .salon-carrasco { left: 10px; width: 30%; } /* Alargado */
+        .fiscalia { left: 31%; width: 10%; }
+        .salon-virgen { left: 31%; width: 10%; top: 430px; height: 80px; }
+        
+        .ingreso-salida-box { left: 42%; width: 15%; }
+        
+        .jurado { left: 58%; width: 15%; }
+        .oratorio { left: 73%; width: 16.5%; }
+
+        /* Ajustes de Altura en Fila Inferior */
+        .salon-carrasco, .ingreso-salida-box { height: 160px; }
+        .jurado, .fiscalia { height: 70px; }
+        .oratorio { height: 160px; }
+
+        /* Flechas de Ingreso/Salida */
+        .flecha {
+            position: absolute;
+            font-size: 3em;
+            font-weight: 900;
+            z-index: 10;
+        }
+
+        .flecha-ingreso { color: var(--color-ingreso); top: 380px; left: 42%; text-shadow: 0 0 5px rgba(0,0,0,0.5); }
+        .flecha-salida { color: var(--color-salida); top: 450px; left: 42%; text-shadow: 0 0 5px rgba(0,0,0,0.5); }
 
 
     </style>
@@ -121,49 +179,41 @@
     <div class="titulo">UBICACIÓN DE MESAS POR CUADRILLAS Y GRUPOS</div>
 
     <div class="plano">
-        <div class="area color-sshh" style="top: 10px; left: 10px; width: 50px; height: 50px;">SS. HH. <br> CABALLEROS</div>
+        <div class="area color-sshh sshh sshh-cab">SS. HH. CABALLEROS</div>
+        <div class="area color-cafe bar-cafe bar">BAR</div>
+        <div class="area color-cafe bar-cafe cafeteria">CAFETERÍA</div>
+        <div class="area color-sshh sshh sshh-damas">SS. HH. DAMAS</div>
         
-        <div class="area color-cafe" style="top: 10px; left: 65px; width: 330px; height: 50px;">BAR</div>
-        
-        <div class="area color-cafe" style="top: 10px; left: 400px; width: 330px; height: 50px;">CAFETERÍA</div>
-        
-        <div class="area color-sshh" style="top: 10px; right: 10px; width: 50px; height: 50px;">SS. HH. <br> DAMAS</div>
-
-        <div class="mesa mesa-4" style="top: 120px; left: 100px; width: 170px; height: 40px;">
+        <div class="mesa mesa-derecha mesa-4" style="top: 120px; left: 10px; width: 230px; height: 40px;">
             MESA N° 4 <br> CUADRILLAS 13 - 14 - 15 - 16
         </div>
-        
-        <div class="mesa mesa-3" style="top: 180px; left: 100px; width: 170px; height: 40px;">
+        <div class="mesa mesa-derecha mesa-3" style="top: 180px; left: 10px; width: 230px; height: 40px;">
             MESA N° 3 <br> CUADRILLAS 9 - 10 - 11 - 12
         </div>
-        
-        <div class="mesa mesa-2" style="top: 240px; left: 100px; width: 170px; height: 40px;">
+        <div class="mesa mesa-derecha mesa-2" style="top: 240px; left: 10px; width: 230px; height: 40px;">
             MESA N° 2 <br> CUADRILLAS 5 - 6 - 7 - 8
         </div>
         
-        <div class="mesa mesa-5" style="top: 120px; right: 100px; width: 170px; height: 40px;">
+        <div class="mesa mesa-izquierda mesa-5" style="top: 120px; right: 10px; width: 230px; height: 40px;">
             MESA N° 5 <br> CUADRILLAS 17 - 18 - 19 - 20 <br> **CANTORAS**
         </div>
-        
-        <div class="mesa mesa-1" style="top: 240px; right: 100px; width: 170px; height: 40px;">
+        <div class="mesa mesa-izquierda mesa-1" style="top: 240px; right: 10px; width: 230px; height: 40px;">
             MESA N° 1 <br> CUADRILLA 1 <br> **SAHUMADORAS**
         </div>
 
-        <div class="area color-salon" style="top: 350px; left: 10px; width: 160px; height: 130px;">SALÓN CARRASCO</div>
+        <div class="area color-salon inferior salon-carrasco">SALÓN CARRASCO</div>
         
-        <div class="area color-salon" style="top: 410px; left: 180px; width: 160px; height: 70px;">SALÓN VIRGEN DEL CARMEN</div>
+        <div class="area color-office inferior fiscalia">FISCALÍA</div>
+        <div class="area color-salon inferior salon-virgen">SALÓN VIRGEN DEL CARMEN</div>
         
-        <div class="area color-office" style="top: 350px; left: 180px; width: 160px; height: 55px;">FISCALÍA</div>
-        
-        <div class="area" style="top: 350px; left: 350px; width: 200px; height: 130px; background: #CEC4B5; color: var(--color-marrondark); flex-direction: column; justify-content: space-around; font-size: 0.8em;">
-            <div style="font-size: 1.5em; transform: scaleY(1.5);">&uarr;</div>
-            INGRESO Y SALIDA
-            <div style="font-size: 1.5em; transform: scaleY(1.5);">&darr;</div>
+        <div class="area inferior ingreso-salida-box" style="background: var(--color-crema); border: none;">
+            <div style="color: var(--color-marrondark); font-size: 1.1em; transform: scaleY(1.1);">INGRESO Y SALIDA</div>
         </div>
+        <div class="flecha flecha-ingreso" style="right: 50%; margin-right: 5px;">&uarr;</div>
+        <div class="flecha flecha-salida" style="right: 50%; margin-right: 5px; top: 450px;">&darr;</div>
 
-        <div class="area color-office" style="top: 350px; right: 10px; width: 160px; height: 55px;">JURADO ELECTORAL</div>
-        
-        <div class="area color-oratorio" style="top: 410px; right: 10px; width: 160px; height: 70px;">ORATORIO</div>
+        <div class="area color-office inferior jurado">JURADO ELECTORAL</div>
+        <div class="area color-oratorio inferior oratorio">ORATORIO</div>
         
     </div>
 </div>
