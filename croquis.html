@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ubicación de Mesas - PROPORCIONES FINALES Y SIMETRÍA</title>
+    <title>Ubicación de Mesas - DISEÑO FINAL DE COLOR Y SIN BORDES</title>
     <style>
         /* Paleta de Colores: Marrón, Crema, Blanco y Acentos */
         :root {
@@ -24,13 +24,22 @@
             /* Alturas y posiciones escaladas */
             --area-top-height: 50px;
             --area-bottom-top: 300px; /* Donde comienza la franja inferior */
-            --mesa-height: 48px; /* ¡ALTURA DE MESA AL DOBLE! (Aprox. 48px) */
+            --mesa-height: 48px; 
             
             /* Altura total disponible para la franja inferior */
             --bottom-strip-available-height: calc(var(--plano-height) - var(--area-bottom-top));
             --bottom-strip-usable-height: calc(var(--bottom-strip-available-height) - 10px);
             --stacked-top-height: 75px; 
             --stacked-bottom-height: calc(var(--bottom-strip-usable-height) - var(--stacked-top-height) - var(--gap));
+            
+            /* Degradado de la franja superior */
+            --top-gradient: linear-gradient(to right, 
+                #8D6E63 0%, /* Marrón Suave para los extremos (Baños) */
+                #A1887F 25%, /* Ligeramente más claro en Bar */
+                #BCAAA4 50%, /* Tono neutro en Cafetería (Centro) */
+                #A1887F 75%, /* Ligeramente más claro en Bar/Cafetería derecho */
+                #8D6E63 100% /* Marrón Suave para el extremo (Baño) */
+            );
         }
 
         body {
@@ -71,10 +80,16 @@
             overflow: hidden; 
         }
 
+        /* --- 0. ELIMINACIÓN DE BORDES Y SOMBRAS --- */
+        .area, .mesa, .recuadro {
+            /* ¡QUITAR BORDES Y SOMBRAS DE TODOS LOS ELEMENTOS! */
+            border: none !important; 
+            box-shadow: none !important; 
+        }
+        
         /* --- ESTILO GENERAL Y 3D (para elementos ABSOLUTOS) --- */
         .area, .mesa {
             position: absolute;
-            border: 1px solid var(--color-marrondark);
             text-align: center;
             font-size: 0.65em;
             font-weight: 600;
@@ -83,20 +98,33 @@
             justify-content: center;
             align-items: center;
             box-sizing: border-box;
-            box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.15); 
             border-radius: 8px; 
             padding: 3px;
         }
         
-        /* Colores y Degradados */
-        .color-cafe { background: linear-gradient(to bottom, var(--color-crema), #EFEFEF); }
-        .color-sshh { background: linear-gradient(to bottom, #D7CCC8, #CAC2B7); font-size: 0.55em; }
+        /* Colores y Degradados (Se redefinen solo para los tonos base que se usan en las mesas y áreas inferiores) */
         .color-salon { background: linear-gradient(to bottom right, #A0522D, #8B4513); color: var(--color-blanco); }
         .color-oratorio { background: linear-gradient(to bottom right, #D2B48C, #C9A98A); }
         .color-office { background-color: #E0E0E0; }
 
-        /* --- 1. ESTRUCTURA SUPERIOR (ABS. MANTENER) --- */
-        .sshh, .bar-cafe { height: var(--area-top-height); top: 5px; }
+        /* --- 1. ESTRUCTURA SUPERIOR (DEGRADADO HORIZONTAL) --- */
+        .franja-superior {
+            position: absolute;
+            top: 5px;
+            left: 0;
+            width: 100%;
+            height: var(--area-top-height);
+            /* APLICAR EL DEGRADADO PRINCIPAL AL CONTENEDOR DE LA FRANJA */
+            background: var(--top-gradient);
+            border-radius: 8px;
+        }
+
+        /* Los elementos individuales ahora se posicionan sobre el degradado */
+        .sshh, .bar-cafe { height: var(--area-top-height); top: 0; position: absolute; } 
+        
+        /* El texto necesita un fondo transparente para que se vea el degradado del padre */
+        .area-transparente { background-color: transparent !important; }
+
         .w-sshh { width: 18%; }
         .w-bar-cafe { width: 30%; }
         .sshh-cab { left: 0; }
@@ -108,43 +136,21 @@
         .mesa { 
             z-index: 10; 
             padding: 6px 8px; 
-            font-size: 0.55em; /* Aumento de fuente para mejor lectura con altura doble */
+            font-size: 0.55em; 
             border-radius: 4px; 
-            box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2); 
             width: 130px; 
-            height: var(--mesa-height); /* Altura doble */
+            height: var(--mesa-height); 
             line-height: 1.2;
         }
         
-        /* CÁLCULO DE POSICIONES VERTICALES (Para simetría) */
-        /*
-        El espacio vertical disponible entre la parte inferior de la zona superior (5px + 50px = 55px) 
-        y la parte superior de la franja inferior (300px) es: 300 - 55 = 245px.
-
-        Necesitamos 3 mesas (3 * 48px = 144px) y 4 espacios (e). 
-        4 * e + 144 = 245 -> 4e = 101 -> e ≈ 25.25px.
-        
-        Posición base (55px) + Espacio (e) = 80.25px. Usaremos valores enteros aproximados para simplificar.
-        e = 26px
-        */
-        
-        /* Las mesas están separadas por un espacio 'e' de ~26px */
-        .mesa-4 { top: 81px; left: 0; } /* 55 (bottom of top area) + 26 (e) */
+        /* Posiciones Verticales Mantenidas */
+        .mesa-4 { top: 81px; left: 0; } 
         .mesa-5 { top: 81px; right: 0; }
-        
-        .mesa-3 { top: 155px; left: 0; } /* 81 + 48 (h) + 26 (e) = 155 */
-        
-        .mesa-2 { top: 229px; left: 0; } /* 155 + 48 (h) + 26 (e) = 229 */
+        .mesa-3 { top: 155px; left: 0; } 
+        .mesa-2 { top: 229px; left: 0; } 
         .mesa-1 { top: 229px; right: 0; }
         
-        /* Comprobación de la distancia inferior:
-        Top de MESA 2 (229) + Altura de MESA 2 (48) = 277px.
-        Distancia al área inferior (300px) es 300 - 277 = 23px.
-        Esto es simétrico con el espacio superior de 26px (SS.HH. a MESA 4).
-        ¡La simetría es correcta!
-        */
-
-        /* Estilo de la flecha */
+        /* Estilo de la flecha - Aumentar tamaño para mejor visibilidad sin borde */
         .mesa::after {
             content: '';
             position: absolute;
@@ -152,22 +158,22 @@
             height: 0;
             top: 50%;
             transform: translateY(-50%);
-            border-top: 8px solid transparent; 
-            border-bottom: 8px solid transparent;
+            border-top: 10px solid transparent; 
+            border-bottom: 10px solid transparent;
         }
 
-        .mesa-derecha::after { right: -12px; border-left: 12px solid; } /* Apunta a la izquierda (Centro) */
-        .mesa-izquierda::after { left: -12px; border-right: 12px solid; } /* Apunta a la derecha (Centro) */
+        .mesa-derecha::after { right: -15px; border-left: 15px solid; } 
+        .mesa-izquierda::after { left: -15px; border-right: 15px solid; } 
 
         /* Colores y Degradados de Mesas */
-        .mesa-4, .mesa-5 { background: linear-gradient(135deg, var(--color-acento-claro), #C0C0C0); }
+        .mesa-4, .mesa-5 { background: linear-gradient(135deg, var(--color-acento-claro), #C0C0C0); color: var(--color-marrondark); }
         .mesa-4::after { border-right-color: #C0C0C0; }
         .mesa-5::after { border-left-color: #C0C0C0; }
         
         .mesa-3 { background: linear-gradient(135deg, var(--color-acento-oscuro), #795548); color: var(--color-blanco); }
         .mesa-3::after { border-right-color: #795548; }
         
-        .mesa-2 { background: linear-gradient(135deg, #BCAAA4, #A1887F); }
+        .mesa-2 { background: linear-gradient(135deg, #BCAAA4, #A1887F); color: var(--color-marrondark); }
         .mesa-2::after { border-right-color: #A1887F; }
         
         .mesa-1 { background: linear-gradient(135deg, var(--color-marrondark), #211A1A); color: var(--color-blanco); }
@@ -197,7 +203,7 @@
             gap: var(--gap);
         }
         
-        /* Definición de Anchos de Columna (Usando flex-basis para control fino) */
+        /* Definición de Anchos de Columna */
         .columna-1 { flex-basis: 25%; } 
         .columna-2 { flex-basis: 20%; } 
         .columna-3 { flex-grow: 1; }   
@@ -205,7 +211,6 @@
 
         /* Estilos de los Recuadros dentro de las Columnas */
         .recuadro {
-            border: 1px solid var(--color-marrondark);
             text-align: center;
             font-size: 0.65em;
             font-weight: 600;
@@ -214,7 +219,6 @@
             justify-content: center;
             align-items: center;
             box-sizing: border-box;
-            box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.15); 
             border-radius: 8px; 
             padding: 3px;
         }
@@ -240,10 +244,12 @@
     
 
     <div class="plano">
-        <div class="area color-sshh sshh sshh-cab w-sshh">SS. HH. CABALLEROS</div>
-        <div class="area color-cafe bar-cafe bar w-bar-cafe">BAR</div>
-        <div class="area color-cafe bar-cafe cafeteria w-bar-cafe">CAFETERÍA</div>
-        <div class="area color-sshh sshh sshh-damas w-sshh">SS. HH. DAMAS</div>
+        <div class="franja-superior">
+            <div class="area area-transparente sshh sshh-cab w-sshh">SS. HH. CABALLEROS</div>
+            <div class="area area-transparente bar-cafe bar w-bar-cafe">BAR</div>
+            <div class="area area-transparente bar-cafe cafeteria w-bar-cafe">CAFETERÍA</div>
+            <div class="area area-transparente sshh sshh-damas w-sshh">SS. HH. DAMAS</div>
+        </div>
         
         <div class="mesa mesa-izquierda mesa-4" style="background: linear-gradient(135deg, var(--color-acento-claro), #C0C0C0);">MESA N° 4 <br> CUADRILLAS 13 - 14 - 15 - 16</div>
         <div class="mesa mesa-izquierda mesa-3" style="background: linear-gradient(135deg, var(--color-acento-oscuro), #795548); color: var(--color-blanco);">MESA N° 3 <br> CUADRILLAS 9 - 10 - 11 - 12</div>
@@ -263,7 +269,7 @@
             </div>
             
             <div class="columna columna-3">
-                <div class="recuadro recuadro-full ingreso-salida-box">
+                <div class="recuadro recuadro-full ingreso-salida-box" style="background-color: var(--color-crema);">
                     <div class="label-io">
                         <div class="flecha flecha-salida" style="color: var(--color-salida);">&darr;</div>
                         <div style="color: var(--color-marrondark); font-weight: 700;">SALIDA</div>
