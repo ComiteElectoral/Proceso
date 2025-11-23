@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ubicación de Mesas - Diseño Alargado Profesional</title>
+    <title>Ubicación de Mesas - Diseño Final, Proporciones Corregidas</title>
     <style>
         /* Paleta de Colores: Marrón, Crema, Blanco y Acentos */
         :root {
@@ -29,7 +29,7 @@
         }
 
         .croquis-container {
-            /* Se reduce el ancho (ej. 550px) y se mantiene la altura o se ajusta si es necesario */
+            /* Contenedor Alargado */
             width: 550px; 
             padding: 25px;
             border-radius: 18px;
@@ -40,7 +40,7 @@
 
         .titulo {
             text-align: center;
-            font-size: 1.8em; /* Ajuste el tamaño de fuente para el menor ancho */
+            font-size: 1.8em;
             font-weight: 800;
             color: var(--color-marrondark);
             margin-bottom: 20px;
@@ -49,17 +49,17 @@
 
         .plano {
             width: 100%;
-            height: 700px; /* Incrementamos la altura para alargar la proporción */
+            height: 700px; /* Altura mantenida para el efecto alargado */
             position: relative;
             border: 1px solid #E0E0E0;
         }
 
-        /* --- ESTILO GENERAL Y 3D PARA TODOS LOS RECUADROS --- */
+        /* --- ESTILO GENERAL Y 3D --- */
         .area, .mesa, .salon-virgen {
             position: absolute;
             border: 1px solid var(--color-marrondark);
             text-align: center;
-            font-size: 0.7em; /* Ajuste de fuente para el nuevo tamaño */
+            font-size: 0.7em;
             font-weight: 600;
             color: var(--color-marrondark);
             display: flex;
@@ -69,8 +69,8 @@
             box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.15); 
             border-radius: 8px; 
             padding: 5px;
+            overflow: hidden;
         }
-        .area, .salon-virgen { overflow: hidden; }
         
         /* Colores y Degradados */
         .color-cafe { background: linear-gradient(to bottom, var(--color-crema), #EFEFEF); }
@@ -79,71 +79,61 @@
         .color-oratorio { background: linear-gradient(to bottom right, #D2B48C, #C9A98A); }
         .color-office { background-color: #E0E0E0; }
 
-        /* --- 1. AJUSTES DE ESTRUCTURA SUPERIOR --- */
+        /* --- 1. ESTRUCTURA SUPERIOR --- (No cambia) */
         .sshh { height: 70px; top: 10px; }
         .bar-cafe { height: 70px; top: 10px; }
-        
-        /* Anchos ajustados para el nuevo contenedor (manteniendo el % de distribución) */
         .sshh-cab { left: 10px; width: 18%; }
         .bar { left: 19%; width: 30%; }
         .cafeteria { left: 49.5%; width: 30%; }
         .sshh-damas { right: 10px; width: 18%; }
 
-        /* --- 2. MESAS (Flechas) --- */
-        .mesa { z-index: 10; padding: 8px 10px; font-size: 0.55em; border-radius: 5px; }
-
-        /* Posicionamiento en el centro del nuevo contenedor alargado */
-        .mesa-4 { top: 140px; left: 10px; width: 150px; height: 35px; }
-        .mesa-3 { top: 200px; left: 10px; width: 150px; height: 35px; }
-        .mesa-2 { top: 260px; left: 10px; width: 150px; height: 35px; }
-        .mesa-5 { top: 140px; right: 10px; width: 150px; height: 35px; }
-        .mesa-1 { top: 260px; right: 10px; width: 150px; height: 35px; }
-
-        /* Estilo de Flecha (tamaños ajustados al nuevo ancho) */
+        /* --- 2. MESAS --- (No cambia) */
+        .mesa { z-index: 10; padding: 8px 10px; font-size: 0.55em; border-radius: 5px; box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25); }
         .mesa-derecha::after { right: -12px; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 12px solid; }
         .mesa-izquierda::after { left: -12px; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-right: 12px solid; }
         
-        /* Colores y Degradados de Mesas (sin cambios en la paleta) */
-        .mesa-4, .mesa-5 { background: linear-gradient(135deg, var(--color-acento-claro), #C0C0C0); }
+        .mesa-4 { top: 140px; left: 10px; width: 150px; height: 35px; background: linear-gradient(135deg, var(--color-acento-claro), #C0C0C0); }
         .mesa-4::after { border-left-color: #C0C0C0; }
-        .mesa-5::after { border-right-color: #C0C0C0; }
-        .mesa-3 { background: linear-gradient(135deg, var(--color-acento-oscuro), #795548); color: var(--color-blanco); }
+        .mesa-3 { top: 200px; left: 10px; width: 150px; height: 35px; background: linear-gradient(135deg, var(--color-acento-oscuro), #795548); color: var(--color-blanco); }
         .mesa-3::after { border-left-color: #795548; }
-        .mesa-2 { background: linear-gradient(135deg, #BCAAA4, #A1887F); }
+        .mesa-2 { top: 260px; left: 10px; width: 150px; height: 35px; background: linear-gradient(135deg, #BCAAA4, #A1887F); }
         .mesa-2::after { border-left-color: #A1887F; }
-        .mesa-1 { background: linear-gradient(135deg, var(--color-marrondark), #211A1A); color: var(--color-blanco); }
+        .mesa-5 { top: 140px; right: 10px; width: 150px; height: 35px; background: linear-gradient(135deg, var(--color-acento-claro), #C0C0C0); }
+        .mesa-5::after { border-right-color: #C0C0C0; }
+        .mesa-1 { top: 260px; right: 10px; width: 150px; height: 35px; background: linear-gradient(135deg, var(--color-marrondark), #211A1A); color: var(--color-blanco); }
         .mesa-1::after { border-right-color: #211A1A; }
 
 
-        /* --- 3. AJUSTES DE ESTRUCTURA INFERIOR --- */
-        .inferior { top: 400px; height: 280px; margin-top: 10px; } /* Aumento de altura */
+        /* --- 3. ESTRUCTURA INFERIOR (AJUSTES FINALES) --- */
+        .inferior { top: 400px; height: 280px; margin-top: 10px; }
 
-        /* Anchos ajustados para el nuevo contenedor (manteniendo el % de distribución) */
-        .salon-carrasco { left: 10px; width: 33%; }
-        .fiscalia { left: 34%; width: 10%; }
-        .salon-virgen { left: 34%; width: 10%; top: 500px; height: 180px; } /* Más altura */
-        .ingreso-salida-box { left: 45%; width: 10%; }
-        .jurado { left: 56%; width: 18%; }
-        .oratorio { left: 75%; width: 22%; }
+        /* Paso 1: Reducir Salón Carrasco (33% -> 25%) */
+        .salon-carrasco { left: 10px; width: 25%; }
         
-        /* Alturas ajustadas */
-        .salon-carrasco, .ingreso-salida-box, .oratorio { height: 280px; }
-        .jurado, .fiscalia { height: 90px; }
+        /* Paso 2: Aumentar Fiscalía/Salón Virgen del Carmen (28% -> 36%) */
+        .fiscalia { left: 26%; width: 18%; }
+        .salon-virgen { left: 26%; width: 18%; top: 500px; height: 180px; }
+        
+        /* Paso 3: Mover Ingreso/Salida y aumentar su ancho (10% -> 12%) */
+        .ingreso-salida-box { left: 45%; width: 12%; }
+
+        /* Paso 4: Reorganizar Jurado Electoral (Encima de Oratorio) */
+        /* Jurado Electoral y Oratorio ahora comparten el espacio derecho */
+        .jurado { left: 58%; width: 20%; height: 140px; top: 400px; } /* Mitad superior */
+        .oratorio { left: 58%; width: 20%; height: 140px; top: 550px; } /* Mitad inferior */
+        
+        /* Ajuste de Salón Carrasco y Oratorio (El Oratorio ya no necesita su propia posición, Jurado Electoral lo define) */
+        .salon-carrasco, .ingreso-salida-box { height: 280px; }
+        .fiscalia { height: 90px; }
+        
+        /* Altura de Oratorio y Jurado Electoral */
+        .oratorio, .jurado { height: 130px; }
+
 
         /* Flechas de Ingreso/Salida */
         .ingreso-salida-box { display: flex; flex-direction: column; align-items: center; justify-content: space-around; padding: 0; }
         .flecha { font-size: 2em; font-weight: 900; text-shadow: 0 0 5px rgba(0,0,0,0.5); line-height: 1; }
         
-        /* Posicionamiento de flechas a los costados del texto DENTRO de la caja */
-        .ingreso-salida-box > div:not(.flecha) {
-            margin: 5px 0;
-            font-size: 0.8em;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        /* Estructura interna para las flechas laterales */
         .ingreso-salida-box .label-io {
             display: flex;
             width: 100%;
@@ -151,9 +141,8 @@
             align-items: center;
             text-align: center;
             padding: 5px 0;
-            margin-top: 15px; /* Separación de la parte superior del box */
+            margin-top: 15px;
         }
-        
     </style>
 </head>
 <body>
@@ -180,11 +169,13 @@
         
         <div class="area inferior ingreso-salida-box">
             <div class="label-io">
-                <div class="flecha flecha-salida">&darr;</div> <div style="color: var(--color-marrondark); font-weight: 700;">SALIDA</div>
+                <div class="flecha flecha-salida" style="color: var(--color-salida);">&darr;</div>
+                <div style="color: var(--color-marrondark); font-weight: 700;">SALIDA</div>
             </div>
             <div class="label-io">
                 <div style="color: var(--color-marrondark); font-weight: 700;">INGRESO</div>
-                <div class="flecha flecha-ingreso">&uarr;</div> </div>
+                <div class="flecha flecha-ingreso" style="color: var(--color-ingreso);">&uarr;</div>
+            </div>
         </div>
 
         <div class="area color-office inferior jurado">JURADO ELECTORAL</div>
