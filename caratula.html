@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elecciones Generales HSVCL - 23 de Noviembre</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* ---------------------------------
+           VARIABLES DE PALETA Y ESTILOS PREMIUM
+        --------------------------------- */
+        :root {
+            --color-marrondark: #4A3C2F;     /* Marrón chocolate profundo */
+            --color-dorado-accent: #B8860B; /* Dorado para acentos importantes */
+            --color-crema-bg: #FAF8F5;       /* Fondo crema suave */
+            --color-blanco-main: #FFFFFF;    /* Blanco puro para contenido */
+            --color-amarillo-soft: #FFD700; /* Amarillo para detalles */
+            --text-light: #F0EAD6; /* Texto claro para fondos oscuros */
+            --shadow-subtle: 0 4px 10px rgba(0, 0, 0, 0.1);
+            --shadow-deep: 0 8px 25px rgba(0, 0, 0, 0.3);
+            --border-radius-main: 10px;
+        }
+
+        /* ---------------------------------
+           ESTRUCTURA BASE Y FONDO
+        --------------------------------- */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: var(--color-crema-bg);
+            color: var(--color-marrondark);
+            overflow-x: hidden; /* Previene scroll horizontal */
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 900px; /* Ancho máximo para el diseño */
+            background-color: var(--color-blanco-main);
+            border-radius: var(--border-radius-main);
+            box-shadow: var(--shadow-deep);
+            overflow: hidden; /* Asegura que la imagen de fondo no se desborde */
+            position: relative;
+            min-height: 800px; /* Altura mínima para la carátula */
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* IMAGEN DE FONDO DE LA VIRGEN DEL CARMEN */
+        .background-image-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0; /* Detrás del contenido */
+        }
+
+        .background-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Cubre todo el espacio */
+            filter: grayscale(40%) brightness(0.6) contrast(1.1); /* Efecto vintage y sutil */
+            opacity: 0.3; /* Opacidad para que no opaque el texto */
+            transform: scale(1.05); /* Pequeño zoom para evitar bordes afilados */
+        }
+
+        /* Capa de degradado sobre la imagen para mejorar legibilidad */
+        .background-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.9) 50%, var(--color-blanco-main) 100%);
+            z-index: 1;
+        }
+
+        /* ---------------------------------
+           CONTENIDO PRINCIPAL
+        --------------------------------- */
+        .content {
+            position: relative; /* Para que el contenido esté sobre la imagen de fondo */
+            z-index: 2;
+            padding: 30px 40px;
+            text-align: center;
+            flex-grow: 1; /* Permite que el contenido ocupe el espacio restante */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Distribuye el espacio entre los bloques */
+        }
+
+        /* HEADER: Título y Logos */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Centra los elementos */
+            gap: 20px; /* Espacio entre logos y título */
+            margin-bottom: 25px;
+            flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
+        }
+
+        .logo {
+            width: 100px; /* Tamaño de los logos */
+            height: auto;
+            border-radius: 50%; /* Si son circulares */
+            box-shadow: var(--shadow-subtle);
+            border: 2px solid var(--color-dorado-accent);
+        }
+
+        .main-title {
+            font-family: 'Playfair Display', serif; /* Fuente elegante para el título */
+            font-size: 2.8em; /* Tamaño del título principal */
+            color: var(--color-marrondark);
+            margin: 0;
+            line-height: 1.1;
+            /* Degradado de texto para un efecto premium */
+            background: linear-gradient(to right, var(--color-marrondark), #6E5F52);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Información de Evento */
+        .event-info {
+            margin-bottom: 30px;
+            margin-top: 20px;
+        }
+
+        .event-date {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--color-marrondark);
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+
+        .event-time {
+            font-size: 1.4em;
+            font-weight: 600;
+            /* Acento amarillo para la hora */
+            color: var(--color-dorado-accent);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .event-slogan {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1em;
+            font-style: italic;
+            color: #6E5F52; /* Un tono intermedio */
+            margin-top: 15px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Información de Sede */
+        .location-info {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: var(--color-crema-bg);
+            border-radius: var(--border-radius-main);
+            box-shadow: var(--shadow-subtle);
+            border: 1px solid #E0DED7;
+        }
+
+        .location-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: var(--color-dorado-accent);
+            margin-bottom: 10px;
+        }
+
+        .location-address {
+            font-size: 1.1em;
+            color: var(--color-marrondark);
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        /* Google Maps */
+        .map-container {
+            border-radius: var(--border-radius-main);
+            overflow: hidden; /* Asegura que el iframe respete el border-radius */
+            margin-top: 20px;
+            box-shadow: var(--shadow-subtle);
+            border: 2px solid var(--color-dorado-accent);
+            width: 100%;
+            height: 300px; /* Altura del mapa */
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none; /* Elimina el borde predeterminado del iframe */
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 30px;
+            font-size: 0.9em;
+            color: #8C7B6A; /* Tono de gris/marrón para el footer */
+            padding-top: 20px;
+            border-top: 1px solid #EEE;
+        }
+
+        /* ---------------------------------
+           RESPONSIVIDAD
+        --------------------------------- */
+        @media (max-width: 768px) {
+            .main-container {
+                min-height: auto;
+                margin: 20px;
+            }
+            .content {
+                padding: 20px;
+            }
+            .main-title {
+                font-size: 2em;
+            }
+            .event-date {
+                font-size: 1.5em;
+            }
+            .event-time {
+                font-size: 1.2em;
+            }
+            .header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .logo {
+                width: 80px;
+            }
+            .map-container {
+                height: 250px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .content {
+                padding: 15px;
+            }
+            .main-title {
+                font-size: 1.8em;
+            }
+            .logo {
+                width: 70px;
+            }
+            .event-date {
+                font-size: 1.3em;
+            }
+            .event-time {
+                font-size: 1.1em;
+            }
+            .location-address {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-container">
+    <div class="background-image-container">
+        <img src="https://via.placeholder.com/1200x800/8C7B6A/FAF8F5?text=Imagen+Virgen+del+Carmen" alt="Virgen del Carmen">
+    </div>
+    <div class="background-overlay"></div>
+
+    <div class="content">
+        <header class="header">
+            <img src="https://via.placeholder.com/100x100/4A3C2F/FFD700?text=Logo+Izq" alt="Insignia Izquierda" class="logo logo-left">
+            
+            <h1 class="main-title">ELECCIONES GENERALES HSVCL</h1>
+            
+            <img src="https://via.placeholder.com/100x100/4A3C2F/FFD700?text=Logo+Der" alt="Insignia Derecha" class="logo logo-right">
+        </header>
+
+        <section class="event-info">
+            <p class="event-date"><strong>23 DE NOVIEMBRE</strong></p>
+            <p class="event-time">DE 9:00 AM A 4:00 PM</p>
+            <p class="event-slogan">"Por la Unión y el Progreso de Nuestra Hermandad"</p>
+        </section>
+
+        <section class="location-info">
+            <h2 class="location-title">SEDE INSTITUCIONAL DE NUESTRA HERMANDAD</h2>
+            <p class="location-address">Jirón Junín 1145 - 1149, Lima Cercado</p>
+
+            <div class="map-container">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3902.046552042735!2d-77.02700878518331!3d-12.042145391456952!2m3!1f0!2m3!1f0!2f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c589b2756a59%3A0xc4a4b4f5d6f1c4e7!2sJr.%20Jun%C3%ADn%201145%2C%20Cercado%20de%20Lima%2015001!5e0!3m2!1ses-419!2spe!4v1678901234567!5m2!1ses-419!2spe" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p>&copy; 2023 Hermandad de la Virgen del Carmen. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+</div>
+
+</body>
+</html>
