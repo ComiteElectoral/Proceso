@@ -16,18 +16,19 @@
             --color-primary-base: #AF710E;
             --color-primary-light: #D49D46;
             --color-primary-dark: #8C5B0A;
+            --color-primary-mid: #BF872F; 
             
             /* Paleta Diferenciadora (Grises Tostados/Beige) para Mesas y Oficinas */
             --color-mesa-dark: #A1887F;   /* Marrón Grisáceo Oscuro */
             --color-mesa-light: #D7CCC8;  /* Marrón Grisáceo Claro */
             
-            /* Colores de Funcionalidad (Se mantienen por claridad, pero se atenúan) */
+            /* Colores de Funcionalidad (Se mantienen por claridad) */
             --color-ingreso: #4CAF50;
             --color-salida: #F44336;
             
             --gap: 4px; 
             
-            /* DIMENSIONES CLAVE (Estructura Intacta) */
+            /* DIMENSIONES CLAVE (ESTRUCTURA INTACTA) */
             --plano-width-container: 470px;
             --plano-height: 510px;
             --area-top-height: 50px;
@@ -54,9 +55,8 @@
             width: var(--plano-width-container);
             padding: 20px;
             border-radius: 18px;
-            /* Se mantiene el fondo sutil */
             background: linear-gradient(135deg, var(--color-blanco) 0%, #F5F5F5 100%);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4); /* Sombra más pronunciada */
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
             border: 6px solid var(--color-marrondark);
         }
 
@@ -73,20 +73,20 @@
             width: calc(100% - var(--gap) * 2); 
             height: var(--plano-height);
             position: relative;
-            border: none; /* Se quita el borde plano del plano interior */
+            border: 1px solid #E0E0E0;
             margin: var(--gap);
             overflow: hidden; 
         }
 
-        /* --- 0. ELIMINACIÓN DE BORDES Y SOMBRAS DE TODOS LOS RECUADROS --- */
+        /* --- 0. ELIMINACIÓN DE BORDES Y SOMBRAS DE TODOS LOS RECUADROS (INTACTO) --- */
         .area, .mesa, .recuadro {
             border: none !important; 
             box-shadow: none !important; 
         }
         
-        /* --- ESTILO GENERAL Y 3D --- */
-        .area, .mesa, .recuadro {
-            position: absolute; /* Reestablecido por seguridad, pero solo para .area y .mesa */
+        /* --- ESTILO GENERAL Y 3D (INTACTO) --- */
+        .area, .mesa {
+            position: absolute;
             text-align: center;
             font-size: 0.65em;
             font-weight: 600;
@@ -96,29 +96,29 @@
             box-sizing: border-box;
             border-radius: 8px; 
             padding: 3px;
+            color: var(--color-marrondark);
         }
         
-        /* === 1. FRANJA SUPERIOR: DEGRADADOS PROFESIONALES Y COHESIVOS (Color Primary) === */
+        /* === 1. FRANJA SUPERIOR: DEGRADADOS VIVOS (INTACTO) === */
         .sshh, .bar-cafe { 
-            color: var(--color-blanco) !important; /* Texto blanco forzado */
-            /* Añadimos una sombra interna para dar sensación de profundidad */
-            box-shadow: inset 0 -3px 5px rgba(0, 0, 0, 0.2); 
+            height: var(--area-top-height); 
+            top: 5px; 
+            color: var(--color-blanco) !important; 
         }
         
-        /* 1. SS. HH. CABALLEROS (Oscuro a tono medio) */
-        .sshh-cab { background: linear-gradient(to right, var(--color-primary-dark), var(--color-primary-base)); }
+        /* 1. SS. HH. CABALLEROS */
+        .sshh-cab { background: linear-gradient(to right, var(--color-primary-dark), var(--color-primary-mid)); }
 
-        /* 2. BAR (Tono medio a claro) */
-        .bar { background: linear-gradient(to right, var(--color-primary-base), var(--color-primary-light)); }
+        /* 2. BAR */
+        .bar { background: linear-gradient(to right, var(--color-primary-mid), var(--color-primary-light)); }
 
-        /* 3. CAFETERÍA (Claro a tono medio) */
-        .cafeteria { background: linear-gradient(to right, var(--color-primary-light), var(--color-primary-base)); }
+        /* 3. CAFETERÍA */
+        .cafeteria { background: linear-gradient(to right, var(--color-primary-light), var(--color-primary-mid)); }
 
-        /* 4. SS. HH. DAMAS (Tono medio a oscuro) */
-        .sshh-damas { background: linear-gradient(to right, var(--color-primary-base), var(--color-primary-dark)); }
+        /* 4. SS. HH. DAMAS */
+        .sshh-damas { background: linear-gradient(to right, var(--color-primary-mid), var(--color-primary-dark)); }
 
-        /* --- 1. ESTRUCTURA SUPERIOR (INTACTA) --- */
-        .sshh, .bar-cafe { height: var(--area-top-height); top: 5px; }
+        /* --- POSICIONAMIENTO SUPERIOR (INTACTO) --- */
         .w-sshh { width: 18%; }
         .w-bar-cafe { width: 30%; }
         .sshh-cab { left: 0; }
@@ -126,7 +126,7 @@
         .cafeteria { left: calc(18% + 30% + var(--gap) * 2); }
         .sshh-damas { right: 0; }
 
-        /* === 2. MESAS: ESQUEMA MONOCROMÁTICO (Gris Tostado) === */
+        /* === 2. MESAS: ESQUEMA MONOCROMÁTICO (AJUSTADO) === */
         .mesa { 
             z-index: 10; 
             padding: 6px 8px; 
@@ -135,18 +135,17 @@
             width: 130px; 
             height: var(--mesa-height); 
             line-height: 1.2;
-            color: var(--color-marrondark); /* Texto oscuro por defecto para mesas claras */
-            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave para levantar la mesa */
+            /* La estructura se mantiene, solo se cambian los colores */
         }
         
-        /* Posiciones Verticales (INTACTAS) */
+        /* Posiciones Verticales Mantenidas */
         .mesa-4 { top: 81px; left: 0; } 
         .mesa-5 { top: 81px; right: 0; }
         .mesa-3 { top: 155px; left: 0; } 
         .mesa-2 { top: 229px; left: 0; } 
         .mesa-1 { top: 229px; right: 0; }
         
-        /* Estilo de la flecha */
+        /* Estilo de la flecha (INTACTO) */
         .mesa::after {
             content: '';
             position: absolute;
@@ -161,20 +160,19 @@
         .mesa-derecha::after { right: -15px; border-left: 15px solid; } 
         .mesa-izquierda::after { left: -15px; border-right: 15px solid; } 
 
-        /* Aplica el degradado Gris Tostado a todas las mesas */
+        /* Aplica el degradado Gris Tostado a las mesas secundarias (4, 5, 2) */
         .mesa-4, .mesa-5, .mesa-2 { 
             background: linear-gradient(135deg, var(--color-mesa-light), var(--color-mesa-dark)); 
-            color: var(--color-marrondark);
+            color: var(--color-marrondark); /* Texto oscuro para mesas claras */
         }
         .mesa-4::after, .mesa-5::after, .mesa-2::after { 
-             /* El color de la flecha usa el extremo más oscuro para contraste */
             border-right-color: var(--color-mesa-dark); 
             border-left-color: var(--color-mesa-dark);
         }
 
-        /* MESA 3 y MESA 1 (Se mantienen oscuras para crear jerarquía y contraste) */
+        /* MESAS PRIMARIAS (3 y 1 - Se mantienen oscuras y con texto blanco) */
         .mesa-3 { 
-            background: linear-gradient(135deg, #795548, var(--color-marrondark)); 
+            background: linear-gradient(135deg, var(--color-marronsuave), var(--color-marrondark)); 
             color: var(--color-blanco); 
         }
         .mesa-3::after { border-right-color: var(--color-marrondark); }
@@ -186,17 +184,19 @@
         .mesa-1::after { border-left-color: #211A1A; }
 
 
-        /* === 3. FRANJA INFERIOR: COHESIÓN (Color Primary y Tostados) === */
+        /* === 3. FRANJA INFERIOR: COHESIÓN (AJUSTADO) === */
         
-        /* Salón Carrasco/Virgen: Usa degradado vertical del Color Primario (Énfasis) */
+        /* Salón Carrasco/Virgen usa el nuevo color primario de alta jerarquía */
         .color-salon { 
-            background: linear-gradient(to bottom, var(--color-primary-base), var(--color-primary-dark)); 
+            background: linear-gradient(to bottom right, var(--color-primary-light), var(--color-primary-dark)); 
             color: var(--color-blanco); 
         }
         
-        /* Fiscalía / Jurado Electoral: Tonos Tostados claros (Función, no énfasis) */
+        /* Oratorio: Tono Tostado/Beige cálido */
+        .color-oratorio { background: linear-gradient(to bottom right, #D2B48C, #C9A98A); } 
+        
+        /* Oficinas (Fiscalía / Jurado Electoral): Gris Tostado Claro */
         .color-office { background-color: var(--color-mesa-light); }
-        .color-oratorio { background: linear-gradient(to bottom, #D2B48C, #C9A98A); } /* Mantener tono cálido */
 
         .franja-inferior {
             position: absolute;
