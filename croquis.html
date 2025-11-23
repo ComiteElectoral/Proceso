@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ubicación de Mesas - Diseño Final, Proporciones Corregidas</title>
+    <title>Ubicación de Mesas - Diseño Final Separado</title>
     <style>
         /* Paleta de Colores: Marrón, Crema, Blanco y Acentos */
         :root {
@@ -15,6 +15,7 @@
             --color-acento-oscuro: #8D6E63;
             --color-ingreso: #4CAF50;
             --color-salida: #F44336;
+            --gap: 5px; /* Define el espacio de separación */
         }
 
         body {
@@ -47,10 +48,12 @@
         }
 
         .plano {
-            width: 100%;
+            /* Dejamos un espacio de 10px en total a los lados para el gap */
+            width: calc(100% - var(--gap) * 2); 
             height: 700px;
             position: relative;
             border: 1px solid #E0E0E0;
+            margin: var(--gap);
         }
 
         /* --- ESTILO GENERAL Y 3D --- */
@@ -78,52 +81,66 @@
         .color-oratorio { background: linear-gradient(to bottom right, #D2B48C, #C9A98A); }
         .color-office { background-color: #E0E0E0; }
 
-        /* --- 1. ESTRUCTURA SUPERIOR --- (No cambia) */
+        /* --- CÁLCULOS DE ANCHOS Y POSICIONES CON GAP (18% + GAP + 30% + GAP + 30% + GAP + 18%) --- */
+        
+        /* Definición de Anchos y Margen */
+        .w-sshh { width: 18%; }
+        .w-bar-cafe { width: 30%; }
+        .w-scarrasco { width: 25%; }
+        .w-fiscalia { width: 18%; }
+        .w-ingreso { width: 34%; }
+        .w-jurado { width: 20%; }
+        
+        /* --- 1. ESTRUCTURA SUPERIOR --- */
         .sshh { height: 70px; top: 10px; }
         .bar-cafe { height: 70px; top: 10px; }
-        .sshh-cab { left: 10px; width: 18%; }
-        .bar { left: 19%; width: 30%; }
-        .cafeteria { left: 49.5%; width: 30%; }
-        .sshh-damas { right: 10px; width: 18%; }
 
-        /* --- 2. MESAS --- (No cambia) */
+        .sshh-cab { left: 0; }
+        .bar { left: calc(18% + var(--gap)); } /* 18% + 5px */
+        .cafeteria { left: calc(18% + 30% + var(--gap) * 2); } /* 18% + 30% + 10px */
+        .sshh-damas { right: 0; }
+        
+        /* --- 2. MESAS --- (Posicionamiento ajustado al nuevo plano) */
         .mesa { z-index: 10; padding: 8px 10px; font-size: 0.55em; border-radius: 5px; box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25); }
         .mesa-derecha::after { right: -12px; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 12px solid; }
         .mesa-izquierda::after { left: -12px; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-right: 12px solid; }
         
-        .mesa-4 { top: 140px; left: 10px; width: 150px; height: 35px; background: linear-gradient(135deg, var(--color-acento-claro), #C0C0C0); }
-        .mesa-4::after { border-left-color: #C0C0C0; }
-        .mesa-3 { top: 200px; left: 10px; width: 150px; height: 35px; background: linear-gradient(135deg, var(--color-acento-oscuro), #795548); color: var(--color-blanco); }
-        .mesa-3::after { border-left-color: #795548; }
-        .mesa-2 { top: 260px; left: 10px; width: 150px; height: 35px; background: linear-gradient(135deg, #BCAAA4, #A1887F); }
-        .mesa-2::after { border-left-color: #A1887F; }
-        .mesa-5 { top: 140px; right: 10px; width: 150px; height: 35px; background: linear-gradient(135deg, var(--color-acento-claro), #C0C0C0); }
-        .mesa-5::after { border-right-color: #C0C0C0; }
-        .mesa-1 { top: 260px; right: 10px; width: 150px; height: 35px; background: linear-gradient(135deg, var(--color-marrondark), #211A1A); color: var(--color-blanco); }
-        .mesa-1::after { border-right-color: #211A1A; }
-
-
-        /* --- 3. ESTRUCTURA INFERIOR (AJUSTE FINAL: Ingreso/Salida expandido) --- */
+        /* Mesas Izquierdas */
+        .mesa-4 { top: 140px; left: 0; width: 150px; height: 35px; }
+        .mesa-3 { top: 200px; left: 0; width: 150px; height: 35px; }
+        .mesa-2 { top: 260px; left: 0; width: 150px; height: 35px; }
+        /* Mesas Derechas */
+        .mesa-5 { top: 140px; right: 0; width: 150px; height: 35px; }
+        .mesa-1 { top: 260px; right: 0; width: 150px; height: 35px; }
+        
+        /* --- 3. ESTRUCTURA INFERIOR --- */
         .inferior { top: 400px; height: 280px; margin-top: 10px; }
 
-        /* Salón Carrasco (25% ancho) */
-        .salon-carrasco { left: 10px; width: 25%; }
+        /* Posicionamiento y anchos recalculados con gaps */
         
-        /* Fiscalía y Salón Virgen (18% ancho) */
-        .fiscalia { left: 26%; width: 18%; }
-        .salon-virgen { left: 26%; width: 18%; top: 500px; height: 180px; }
+        /* Salón Carrasco */
+        .salon-carrasco { left: 0; }
         
-        /* Jurado/Oratorio (20% ancho) */
-        .jurado { right: 10px; width: 20%; height: 130px; top: 400px; } /* Pegado a la derecha */
-        .oratorio { right: 10px; width: 20%; height: 130px; top: 550px; } /* Pegado a la derecha */
+        /* Fiscalía y Salón Virgen */
+        .fiscalia { left: calc(25% + var(--gap)); }
+        .salon-virgen { left: calc(25% + var(--gap)); top: 500px; height: 180px; }
         
-        /* Ingreso/Salida BOX (Expandido para tomar el espacio restante) */
-        /* Nuevo ancho: 100% - (25% + 1% gap) - (18% + 1% gap) - (20% + 1% gap) = 34% (aproximado) */
-        .ingreso-salida-box { left: 45%; width: 34%; height: 280px; } 
+        /* Jurado/Oratorio (Pegado a la derecha) */
+        .jurado { right: 0; height: 130px; top: 400px; }
+        .oratorio { right: 0; height: 130px; top: 550px; }
+        
+        /* Ingreso/Salida BOX (Expandido entre S. Virgen del Carmen y Jurado) */
+        .ingreso-salida-box { 
+            left: calc(25% + 18% + var(--gap) * 2); /* Posición: Carrasco + gap + Fiscalía + gap */
+            /* Ancho: 100% - (25% + 18% + 20%) - 4*gap */
+            width: calc(100% - 25% - 18% - 20% - var(--gap) * 3);
+            height: 280px; 
+        } 
 
-        /* Ajustes de Altura */
+        /* Alturas */
         .salon-carrasco, .ingreso-salida-box { height: 280px; }
         .fiscalia { height: 90px; }
+        .jurado, .oratorio { height: 130px; }
         
         /* Flechas de Ingreso/Salida */
         .ingreso-salida-box { display: flex; flex-direction: column; align-items: center; justify-content: space-around; padding: 0; }
@@ -146,10 +163,10 @@
     <div class="titulo">UBICACIÓN DE MESAS POR CUADRILLAS Y GRUPOS</div>
 
     <div class="plano">
-        <div class="area color-sshh sshh sshh-cab">SS. HH. CABALLEROS</div>
-        <div class="area color-cafe bar-cafe bar">BAR</div>
-        <div class="area color-cafe bar-cafe cafeteria">CAFETERÍA</div>
-        <div class="area color-sshh sshh sshh-damas">SS. HH. DAMAS</div>
+        <div class="area color-sshh sshh sshh-cab w-sshh">SS. HH. CABALLEROS</div>
+        <div class="area color-cafe bar-cafe bar w-bar-cafe">BAR</div>
+        <div class="area color-cafe bar-cafe cafeteria w-bar-cafe">CAFETERÍA</div>
+        <div class="area color-sshh sshh sshh-damas w-sshh">SS. HH. DAMAS</div>
         
         <div class="mesa mesa-derecha mesa-4">MESA N° 4 <br> CUADRILLAS 13 - 14 - 15 - 16</div>
         <div class="mesa mesa-derecha mesa-3">MESA N° 3 <br> CUADRILLAS 9 - 10 - 11 - 12</div>
@@ -157,10 +174,10 @@
         <div class="mesa mesa-izquierda mesa-5">MESA N° 5 <br> CUADRILLAS 17 - 18 - 19 - 20 <br> **CANTORAS**</div>
         <div class="mesa mesa-izquierda mesa-1">MESA N° 1 <br> CUADRILLA 1 <br> **SAHUMADORAS**</div>
 
-        <div class="area color-salon inferior salon-carrasco">SALÓN CARRASCO</div>
+        <div class="area color-salon inferior salon-carrasco w-scarrasco">SALÓN CARRASCO</div>
         
-        <div class="area color-office inferior fiscalia">FISCALÍA</div>
-        <div class="area color-salon inferior salon-virgen">SALÓN VIRGEN DEL CARMEN</div>
+        <div class="area color-office inferior fiscalia w-fiscalia">FISCALÍA</div>
+        <div class="area color-salon inferior salon-virgen w-fiscalia">SALÓN VIRGEN DEL CARMEN</div>
         
         <div class="area inferior ingreso-salida-box">
             <div class="label-io">
@@ -173,8 +190,8 @@
             </div>
         </div>
 
-        <div class="area color-office inferior jurado">JURADO ELECTORAL</div>
-        <div class="area color-oratorio inferior oratorio">ORATORIO</div>
+        <div class="area color-office inferior jurado w-jurado">JURADO ELECTORAL</div>
+        <div class="area color-oratorio inferior oratorio w-jurado">ORATORIO</div>
         
     </div>
 </div>
