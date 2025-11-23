@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ubicación de Mesas - SOLUCIÓN FINAL CON FLEXBOX</title>
+    <title>Ubicación de Mesas - PROPORCIONES FINALES Y SIMETRÍA</title>
     <style>
         /* Paleta de Colores: Marrón, Crema, Blanco y Acentos */
         :root {
@@ -23,13 +23,14 @@
             
             /* Alturas y posiciones escaladas */
             --area-top-height: 50px;
-            --area-bottom-top: 300px; 
-            --mesa-height: 25px;
+            --area-bottom-top: 300px; /* Donde comienza la franja inferior */
+            --mesa-height: 48px; /* ¡ALTURA DE MESA AL DOBLE! (Aprox. 48px) */
             
             /* Altura total disponible para la franja inferior */
             --bottom-strip-available-height: calc(var(--plano-height) - var(--area-bottom-top));
             --bottom-strip-usable-height: calc(var(--bottom-strip-available-height) - 10px);
             --stacked-top-height: 75px; 
+            --stacked-bottom-height: calc(var(--bottom-strip-usable-height) - var(--stacked-top-height) - var(--gap));
         }
 
         body {
@@ -103,46 +104,104 @@
         .cafeteria { left: calc(18% + 30% + var(--gap) * 2); }
         .sshh-damas { right: 0; }
 
-        /* --- 2. MESAS (ABS. MANTENER) --- */
-        .mesa { z-index: 10; padding: 6px 8px; font-size: 0.5em; border-radius: 4px; box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2); width: 130px; height: var(--mesa-height); }
-        .mesa-4 { top: 90px; left: 0; }
-        .mesa-3 { top: 140px; left: 0; }
-        .mesa-2 { top: 190px; left: 0; }
-        .mesa-5 { top: 90px; right: 0; }
-        .mesa-1 { top: 190px; right: 0; }
-        .mesa-derecha::after { right: -8px; border-top: 6px solid transparent; border-bottom: 6px solid transparent; border-left: 8px solid; }
-        .mesa-izquierda::after { left: -8px; border-top: 6px solid transparent; border-bottom: 6px solid transparent; border-right: 8px solid; }
+        /* --- 2. MESAS (ALTURA DOBLE y POSICIÓN SIMÉTRICA) --- */
+        .mesa { 
+            z-index: 10; 
+            padding: 6px 8px; 
+            font-size: 0.55em; /* Aumento de fuente para mejor lectura con altura doble */
+            border-radius: 4px; 
+            box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2); 
+            width: 130px; 
+            height: var(--mesa-height); /* Altura doble */
+            line-height: 1.2;
+        }
+        
+        /* CÁLCULO DE POSICIONES VERTICALES (Para simetría) */
+        /*
+        El espacio vertical disponible entre la parte inferior de la zona superior (5px + 50px = 55px) 
+        y la parte superior de la franja inferior (300px) es: 300 - 55 = 245px.
+
+        Necesitamos 3 mesas (3 * 48px = 144px) y 4 espacios (e). 
+        4 * e + 144 = 245 -> 4e = 101 -> e ≈ 25.25px.
+        
+        Posición base (55px) + Espacio (e) = 80.25px. Usaremos valores enteros aproximados para simplificar.
+        e = 26px
+        */
+        
+        /* Las mesas están separadas por un espacio 'e' de ~26px */
+        .mesa-4 { top: 81px; left: 0; } /* 55 (bottom of top area) + 26 (e) */
+        .mesa-5 { top: 81px; right: 0; }
+        
+        .mesa-3 { top: 155px; left: 0; } /* 81 + 48 (h) + 26 (e) = 155 */
+        
+        .mesa-2 { top: 229px; left: 0; } /* 155 + 48 (h) + 26 (e) = 229 */
+        .mesa-1 { top: 229px; right: 0; }
+        
+        /* Comprobación de la distancia inferior:
+        Top de MESA 2 (229) + Altura de MESA 2 (48) = 277px.
+        Distancia al área inferior (300px) es 300 - 277 = 23px.
+        Esto es simétrico con el espacio superior de 26px (SS.HH. a MESA 4).
+        ¡La simetría es correcta!
+        */
+
+        /* Estilo de la flecha */
+        .mesa::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            border-top: 8px solid transparent; 
+            border-bottom: 8px solid transparent;
+        }
+
+        .mesa-derecha::after { right: -12px; border-left: 12px solid; } /* Apunta a la izquierda (Centro) */
+        .mesa-izquierda::after { left: -12px; border-right: 12px solid; } /* Apunta a la derecha (Centro) */
+
+        /* Colores y Degradados de Mesas */
+        .mesa-4, .mesa-5 { background: linear-gradient(135deg, var(--color-acento-claro), #C0C0C0); }
+        .mesa-4::after { border-right-color: #C0C0C0; }
+        .mesa-5::after { border-left-color: #C0C0C0; }
+        
+        .mesa-3 { background: linear-gradient(135deg, var(--color-acento-oscuro), #795548); color: var(--color-blanco); }
+        .mesa-3::after { border-right-color: #795548; }
+        
+        .mesa-2 { background: linear-gradient(135deg, #BCAAA4, #A1887F); }
+        .mesa-2::after { border-right-color: #A1887F; }
+        
+        .mesa-1 { background: linear-gradient(135deg, var(--color-marrondark), #211A1A); color: var(--color-blanco); }
+        .mesa-1::after { border-left-color: #211A1A; }
 
 
-        /* --- 3. FRANA INFERIOR (FLEXBOX PARA ESTABILIDAD) --- */
+        /* --- 3. FRANA INFERIOR (FLEXBOX - MANTENER ESTABILIDAD) --- */
         .franja-inferior {
             position: absolute;
             top: var(--area-bottom-top); 
             width: 100%;
             height: var(--bottom-strip-available-height);
             display: flex;
-            justify-content: space-between; /* Distribuye las columnas */
-            align-items: flex-end; /* Alinea todos los contenedores al fondo */
-            padding: 10px var(--gap); /* Margen superior de 10px y gaps laterales */
+            justify-content: space-between; 
+            align-items: flex-end; 
+            padding: 10px var(--gap); 
             box-sizing: border-box;
             gap: var(--gap);
         }
 
         /* Contenedores de Columna (Flex Items) */
         .columna {
-            height: 100%; /* Ocupa toda la altura del padre */
+            height: 100%; 
             box-sizing: border-box;
             display: flex;
-            flex-direction: column; /* Para apilar Fiscalia/S.Virgen */
+            flex-direction: column; 
             gap: var(--gap);
-            border-radius: 8px; /* Aplicado a los hijos para que tengan su propio borde/sombra */
         }
         
         /* Definición de Anchos de Columna (Usando flex-basis para control fino) */
-        .columna-1 { flex-basis: 25%; } /* Salón Carrasco */
-        .columna-2 { flex-basis: 20%; } /* S. Virgen / Fiscalía */
-        .columna-3 { flex-grow: 1; }   /* Ingreso/Salida (ocupa el espacio restante) */
-        .columna-4 { flex-basis: 18%; } /* Oratorio / Jurado */
+        .columna-1 { flex-basis: 25%; } 
+        .columna-2 { flex-basis: 20%; } 
+        .columna-3 { flex-grow: 1; }   
+        .columna-4 { flex-basis: 18%; } 
 
         /* Estilos de los Recuadros dentro de las Columnas */
         .recuadro {
@@ -161,11 +220,9 @@
         }
 
         /* Estilos específicos de Altura */
-        .recuadro-full { height: 100%; } /* Salón Carrasco, Ingreso/Salida */
-        
-        /* Recuadros Apilados (S.Virgen y Oratorio) */
-        .recuadro-top { height: var(--stacked-top-height); } /* Fiscalía / Jurado */
-        .recuadro-bottom { flex-grow: 1; } /* S. Virgen / Oratorio (Ocupa el espacio restante inferior) */
+        .recuadro-full { height: 100%; } 
+        .recuadro-top { height: var(--stacked-top-height); } 
+        .recuadro-bottom { flex-grow: 1; } 
 
         /* Estilos para Ingreso/Salida */
         .ingreso-salida-box { display: flex; flex-direction: column; align-items: center; justify-content: space-around; padding: 0; }
