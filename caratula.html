@@ -102,16 +102,17 @@
             justify-content: space-between; /* Distribuye espacio entre logos y título */
             gap: 15px; /* Espacio entre los elementos */
             margin-bottom: 25px;
-            /* No flex-wrap aquí, manejaremos la reducción de tamaño de los logos */
         }
 
         .logo {
             width: 100px; /* Tamaño de los logos */
             height: auto;
-            flex-shrink: 0; /* No permite que el logo se encoja inicialmente */
-            border-radius: 50%; /* Si son circulares */
-            box-shadow: var(--shadow-subtle);
-            border: 2px solid var(--color-dorado-accent);
+            flex-shrink: 0; 
+            /* --- CAMBIOS AQUÍ: SE ELIMINAN BORDES Y SOMBRAS --- */
+            /* border-radius: 50%; */ 
+            /* box-shadow: var(--shadow-subtle); */
+            /* border: 2px solid var(--color-dorado-accent); */
+            /* ------------------------------------------------ */
         }
 
         .main-title {
@@ -250,7 +251,7 @@
             }
             .logo {
                 width: 50px; /* Logos más pequeños en móviles */
-                border-width: 1px; /* Borde más fino */
+                /* border-width: 1px; */ /* Si eliminamos el borde, esto ya no es necesario */
             }
             .header {
                 gap: 8px; /* Espacio mínimo */
@@ -277,11 +278,11 @@
 
     <div class="content">
         <header class="header">
-            <img src="https://edwinhsvcl14-maker.github.io/asistencias/logo_hermandad.png" alt="Insignia Izquierda" class="logo logo-left">
+            <img src="https://via.placeholder.com/100x100/4A3C2F/FFD700?text=Logo+Izq" alt="Insignia Izquierda" class="logo logo-left">
             
             <h1 class="main-title">ELECCIONES GENERALES HSVCL</h1>
             
-            <img src="https://14cuadrillahsvcl.github.io/Proceso/14c.png" alt="Insignia Derecha" class="logo logo-right">
+            <img src="https://via.placeholder.com/100x100/4A3C2F/FFD700?text=Logo+Der" alt="Insignia Derecha" class="logo logo-right">
         </header>
 
         <section class="event-info">
@@ -312,4 +313,3 @@
 
 </body>
 </html>
-
