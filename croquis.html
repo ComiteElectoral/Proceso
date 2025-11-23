@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ubicación de Mesas - DISEÑO INCREÍBLE CON FLECHAS GRANDES</title>
+    <title>Ubicación de Mesas - ALINEACIÓN DE FLECHAS AJUSTADA</title>
     <style>
         /* ---------------------------------
            PALETA PROFESIONAL (RIGUROSA)
@@ -141,8 +141,6 @@
         .mesa-izquierda::after { left: -15px; border-right: 15px solid; border-right-color: inherit; }
 
         /* APLICACIÓN DE COLORES DE MESAS (EFECTO MADERA PULIDA) */
-
-        /* Mesas Secundarias (4, 5, 2): Tostado Claro con degradado sutil */
         .mesa-4, .mesa-5, .mesa-2 { 
             background: linear-gradient(180deg, var(--color-tostado-claro), #DEDEDE);
             color: var(--color-marrondark);
@@ -150,8 +148,6 @@
         .mesa-4::after { border-right-color: #DEDEDE; }
         .mesa-5::after { border-left-color: #DEDEDE; }
         .mesa-2::after { border-right-color: #DEDEDE; }
-
-        /* Mesas Primarias (3, 1): Marrón Profundo (Máximo Contraste) */
         .mesa-3, .mesa-1 { 
             background: linear-gradient(180deg, var(--color-marrondark), #181818); 
             color: var(--color-blanco); 
@@ -177,7 +173,7 @@
         .columna { height: 100%; box-sizing: border-box; display: flex; flex-direction: column; gap: 4px; }
         .columna-1 { flex-basis: 25%; }
         .columna-2 { flex-basis: 20%; }
-        .columna-3 { flex-grow: 1; }
+        .columna-3 { flex-grow: 1; } /* Columna central flexible */
         .columna-4 { flex-basis: 18%; }
 
         .recuadro {
@@ -199,59 +195,62 @@
         .recuadro-top { height: 75px; }
         .recuadro-bottom { flex-grow: 1; }
 
-        /* APLICACIÓN DE COLORES INFERIORES */
         .color-salon { 
             background: linear-gradient(to bottom, var(--color-primary-mid), var(--color-primary-dark)); 
             color: var(--color-blanco); 
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); 
         }
-        .color-office { 
-            background-color: var(--color-tostado-claro); 
-            color: var(--color-marrondark); 
-        }
-        .color-oratorio { 
-            background-color: var(--color-tostado-medio); 
-            color: var(--color-marrondark); 
-        }
+        .color-office { background-color: var(--color-tostado-claro); color: var(--color-marrondark); }
+        .color-oratorio { background-color: var(--color-tostado-medio); color: var(--color-marrondark); }
 
 
-        /* Ingreso y Salida (ULTIMO CAMBIO) */
+        /* Ingreso y Salida (AJUSTE DE ALINEACIÓN CLAVE) */
         .ingreso-salida-box {
             background-color: var(--color-blanco);
             border: 2px dashed var(--color-marrondark); 
             height: 100%;
             display: flex;
-            flex-direction: column; /* Apila la flecha y el texto verticalmente */
-            align-items: center;
-            justify-content: space-around; /* Espacio uniforme */
-            padding: 0;
+            /* CAMBIO CLAVE: Usa space-between para pegar los elementos a los lados */
+            justify-content: space-between; 
+            flex-direction: column; /* Sigue apilando los dos grupos (Salida y Ingreso) */
+            align-items: stretch; /* Permite que los contenedores internos se estiren */
+            padding: 10px 0; /* Pequeño padding vertical */
             box-shadow: none;
         }
 
-        /* Contenedores para agrupar flecha y texto */
         .flecha-container {
             display: flex;
-            flex-direction: column; /* Flecha arriba, texto abajo */
-            align-items: center;
-            line-height: 1.2; /* Ajuste para el espacio entre flecha y texto */
-            margin: 5px 0; /* Espacio entre los grupos de flecha/texto */
+            flex-direction: column; 
+            line-height: 1.2; 
+            margin: 5px 0; 
+        }
+
+        /* ESTILO ESPECÍFICO PARA CADA DIRECCIÓN */
+        .flecha-container.salida {
+            align-items: flex-start; /* Pega el grupo (flecha/texto) a la izquierda */
+            padding-left: 10px; /* Margen interno para separarlo del borde */
+        }
+
+        .flecha-container.ingreso {
+            align-items: flex-end; /* Pega el grupo (flecha/texto) a la derecha */
+            padding-right: 10px; /* Margen interno para separarlo del borde */
         }
         
         .flecha {
-            /* 400% más grande que el tamaño anterior (1.8em * 4 = 7.2em) */
             font-size: 7.2em; 
             font-weight: 900;
-            line-height: 0.8; /* Ajuste fino para la altura de la línea de la flecha */
+            line-height: 0.8; 
             text-shadow: 0 0 5px rgba(0, 0, 0, 0.2); 
         }
         .flecha-ingreso { color: var(--color-ingreso); }
         .flecha-salida { color: var(--color-salida); }
 
         .label-io-text {
-            font-size: 0.8em; /* Tamaño de texto adecuado para acompañar la flecha grande */
+            font-size: 0.8em; 
             font-weight: bold;
             color: var(--color-marrondark);
-            margin-top: 5px; /* Pequeño margen superior para separar del icono */
+            margin-top: 5px; 
+            text-align: center; /* Asegura que el texto esté centrado bajo su flecha */
         }
     </style>
 </head>
@@ -285,11 +284,13 @@
             
             <div class="columna columna-3">
                 <div class="recuadro recuadro-full ingreso-salida-box">
-                    <div class="flecha-container">
+                    
+                    <div class="flecha-container salida">
                         <div class="flecha flecha-salida">&darr;</div>
                         <div class="label-io-text">SALIDA</div>
                     </div>
-                    <div class="flecha-container">
+                    
+                    <div class="flecha-container ingreso">
                         <div class="flecha flecha-ingreso">&uarr;</div>
                         <div class="label-io-text">INGRESO</div>
                     </div>
