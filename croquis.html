@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ubicación de Mesas - Diseño Final, Posición de Ingreso/Salida Corregida</title>
+    <title>Ubicación de Mesas - Diseño Final, Secuencia de Franja Inferior Corregida</title>
     <style>
         /* Paleta de Colores: Marrón, Crema, Blanco y Acentos */
         :root {
@@ -86,7 +86,7 @@
             padding: 3px;
         }
         
-        /* Colores y Degradados */
+        /* Colores y Degradados (Se mantienen) */
         .color-cafe { background: linear-gradient(to bottom, var(--color-crema), #EFEFEF); }
         .color-sshh { background: linear-gradient(to bottom, #D7CCC8, #CAC2B7); font-size: 0.55em; }
         .color-salon { background: linear-gradient(to bottom right, #A0522D, #8B4513); color: var(--color-blanco); }
@@ -111,35 +111,25 @@
         .mesa-1 { top: 190px; right: 0; }
         .mesa-derecha::after { right: -8px; border-top: 6px solid transparent; border-bottom: 6px solid transparent; border-left: 8px solid; }
         .mesa-izquierda::after { left: -8px; border-top: 6px solid transparent; border-bottom: 6px solid transparent; border-right: 8px solid; }
-        .mesa-4, .mesa-5 { background: linear-gradient(135deg, var(--color-acento-claro), #C0C0C0); }
-        .mesa-3 { background: linear-gradient(135deg, var(--color-acento-oscuro), #795548); color: var(--color-blanco); }
-        .mesa-2 { background: linear-gradient(135deg, #BCAAA4, #A1887F); }
-        .mesa-1 { background: linear-gradient(135deg, var(--color-marrondark), #211A1A); color: var(--color-blanco); }
 
 
-        /* --- 3. ESTRUCTURA INFERIOR (CORRECCIÓN DE INGRESO/SALIDA) --- */
+        /* --- 3. ESTRUCTURA INFERIOR (SECUENCIA CORREGIDA) --- */
         .inferior { top: var(--area-bottom-top); margin-top: 10px; }
         
         /* Definición de Anchos */
         .w-scarrasco { width: 25%; } /* Columna 1 */
-        .w-svirgen-col { width: 18%; } /* Columna 2 (más pequeña que antes) */
-        .w-oratorio-col { width: 20%; } /* Columna 4 (Más pequeña para centrar Ingreso/Salida) */
+        .w-svirgen-col { width: 20%; } /* Columna 2: S. Virgen/Fiscalía */
+        .w-oratorio-col { width: 18%; } /* Columna 4: Oratorio/Jurado */
         
-        /* Posición y Ancho de Ingreso/Salida (Columna 3, ESPACIO RESTANTE) */
+        /* Cálculo del ancho restante para Ingreso/Salida (Columna 3) */
         .w-ingreso { 
-            width: calc(100% - 25% - 18% - 20% - var(--gap) * 3); /* Ancho total - Col1 - Col2 - Col4 - 3 Gaps */
+            width: calc(100% - 25% - 20% - 18% - var(--gap) * 3); /* Ancho total - Col1 - Col2 - Col4 - 3 Gaps */
         }
-        .pos-ingreso {
-            /* Empieza después de Columna 1 (25%) + Columna 2 (18%) + 2 Gaps */
-            left: calc(25% + var(--w-svirgen-col) + var(--gap) * 2); 
-        }
-
-
-        /* Altura de la franja */
-        .salon-carrasco, .ingreso-salida-box { height: var(--bottom-strip-usable-height); }
-        .salon-carrasco { left: 0; } /* Columna 1 */
         
-        /* Columna 2: S. Virgen/Fiscalía */
+        /* Columna 1: Salón Carrasco */
+        .salon-carrasco { left: 0; height: var(--bottom-strip-usable-height); width: var(--w-scarrasco); } 
+        
+        /* Columna 2: S. Virgen/Fiscalía (Empieza después de Columna 1) */
         .fiscalia { 
             left: calc(25% + var(--gap)); 
             width: 15%; /* Fiscalía más angosto */
@@ -147,19 +137,12 @@
         }
         .salon-virgen { 
             left: calc(25% + var(--gap)); 
-            width: var(--w-svirgen-col); /* S. Virgen usa el ancho de la columna */
+            width: var(--w-svirgen-col); 
             height: calc(var(--bottom-strip-usable-height) - 75px - var(--gap));
             top: calc(var(--area-bottom-top) + 10px + 75px + var(--gap));
         }
         
-        /* Columna 3: INGRESO Y SALIDA BOX */
-        .ingreso-salida-box { 
-            /* Usa la posición y el ancho recién calculados */
-            left: var(--pos-ingreso); 
-            width: var(--w-ingreso);
-        } 
-
-        /* Columna 4: Oratorio/Jurado (PEGADO A LA DERECHA) */
+        /* Columna 4: Oratorio/Jurado (Pegado a la Derecha) */
         .oratorio { 
             right: 0; 
             width: var(--w-oratorio-col);
@@ -171,6 +154,14 @@
             width: 15%; /* Jurado más angosto */
             height: 75px; 
         }
+        
+        /* Columna 3: INGRESO Y SALIDA BOX (Entre Columna 2 y Columna 4) */
+        .ingreso-salida-box { 
+            /* Empieza después de Columna 1 (25%) + Columna 2 (20%) + 2 Gaps */
+            left: calc(var(--w-scarrasco) + var(--w-svirgen-col) + var(--gap) * 2); 
+            width: var(--w-ingreso);
+            height: var(--bottom-strip-usable-height);
+        } 
         
         /* Flechas de Ingreso/Salida */
         .ingreso-salida-box { display: flex; flex-direction: column; align-items: center; justify-content: space-around; padding: 0; }
@@ -197,7 +188,7 @@
         <div class="mesa mesa-derecha mesa-5" style="background: linear-gradient(135deg, var(--color-acento-claro), #C0C0C0);">MESA N° 5 <br> CUADRILLAS 17 - 18 - 19 - 20 <br> **CANTORAS**</div>
         <div class="mesa mesa-derecha mesa-1" style="background: linear-gradient(135deg, var(--color-marrondark), #211A1A); color: var(--color-blanco);">MESA N° 1 <br> CUADRILLA 1 <br> **SAHUMADORAS**</div>
 
-        <div class="area color-salon inferior salon-carrasco w-scarrasco">SALÓN CARRASCO</div>
+        <div class="area color-salon inferior salon-carrasco">SALÓN CARRASCO</div>
         
         <div class="area color-office inferior fiscalia">FISCALÍA</div>
         <div class="area color-salon inferior salon-virgen">SALÓN VIRGEN DEL CARMEN</div>
