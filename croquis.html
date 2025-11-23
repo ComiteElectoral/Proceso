@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ubicación de Mesas - ESTRUCTURA PERFECTA + CAMBIOS DE COLOR/BORDE</title>
+    <title>Ubicación de Mesas - ESTRUCTURA PERFECTA + COLOR CHOCOLATE VIVO Y TEXTO BLANCO</title>
     <style>
         /* Paleta de Colores: Marrón, Crema, Blanco y Acentos */
         :root {
@@ -17,13 +17,16 @@
             --color-salida: #F44336;
             --gap: 4px; 
             
+            /* --NUEVO COLOR CHOCOLATE VIVO-- */
+            --color-chocolate-vivo: #A16C57; 
+            
             /* DIMENSIONES CLAVE */
             --plano-width-container: 470px;
             --plano-height: 510px;
             
             /* Alturas y posiciones escaladas */
             --area-top-height: 50px;
-            --area-bottom-top: 300px; /* Donde comienza la franja inferior */
+            --area-bottom-top: 300px; 
             --mesa-height: 48px; 
             
             /* Altura total disponible para la franja inferior */
@@ -71,40 +74,36 @@
             overflow: hidden; 
         }
 
-        /* --- 0. ELIMINACIÓN DE BORDES Y SOMBRAS DE TODOS LOS RECUADROS --- */
+        /* --- 0. ELIMINACIÓN DE BORDES Y SOMBRAS DE TODOS LOS RECUADROS (Mantenido) --- */
         .area, .mesa, .recuadro {
             border: none !important; 
             box-shadow: none !important; 
         }
         
-        /* --- ESTILO GENERAL Y 3D (para elementos ABSOLUTOS) --- */
+        /* --- ESTILO GENERAL Y 3D --- */
         .area, .mesa {
             position: absolute;
             text-align: center;
             font-size: 0.65em;
             font-weight: 600;
-            color: var(--color-marrondark);
             display: flex;
             justify-content: center;
             align-items: center;
             box-sizing: border-box;
             border-radius: 8px; 
             padding: 3px;
+            color: var(--color-marrondark); /* Color de letra por defecto para las mesas */
         }
         
-        /* --- COLORES Y DEGRADADOS (AJUSTADOS PARA NO BORDER) --- */
+        /* --- COLORES Y DEGRADADOS DE LA FRANJA INFERIOR (Mantenidos) --- */
         .color-salon { background: linear-gradient(to bottom right, #A0522D, #8B4513); color: var(--color-blanco); }
         .color-oratorio { background: linear-gradient(to bottom right, #D2B48C, #C9A98A); }
         .color-office { background-color: #E0E0E0; }
 
-        /* --- FRANJA SUPERIOR: DEGRADADO MARRÓN EN CADA RECUADRO --- */
-        .sshh { 
-            background: linear-gradient(to right, #8D6E63, #A1887F); 
-            color: var(--color-blanco);
-        }
-        .bar-cafe { 
-            background: linear-gradient(to right, #A1887F, #BCAAA4); 
-            color: var(--color-marrondark);
+        /* --- FRANJA SUPERIOR: COLOR CHOCOLATE VIVO y TEXTO BLANCO --- */
+        .sshh, .bar-cafe { 
+            background: var(--color-chocolate-vivo); /* Fondo marrón vivo */
+            color: var(--color-blanco) !important; /* Texto blanco forzado */
         }
 
         /* --- 1. ESTRUCTURA SUPERIOR (POSICIONAMIENTO RESTAURADO) --- */
@@ -115,12 +114,8 @@
         .bar { left: calc(18% + var(--gap)); }
         .cafeteria { left: calc(18% + 30% + var(--gap) * 2); }
         .sshh-damas { right: 0; }
-        
-        /* Corrección de colores de texto para los extremos más oscuros */
-        .sshh-cab, .sshh-damas { color: var(--color-blanco); }
 
-
-        /* --- 2. MESAS (ALTURA DOBLE y POSICIÓN SIMÉTRICA RESTAURADA) --- */
+        /* --- 2. MESAS (SIMETRÍA Y TAMAÑO RESTAURADOS) --- */
         .mesa { 
             z-index: 10; 
             padding: 6px 8px; 
@@ -138,7 +133,7 @@
         .mesa-2 { top: 229px; left: 0; } 
         .mesa-1 { top: 229px; right: 0; }
         
-        /* Estilo de la flecha - Mantenido */
+        /* Estilo de la flecha */
         .mesa::after {
             content: '';
             position: absolute;
