@@ -3,23 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ubicación de Mesas - VERSIÓN PULCRITUD EXTREMA Y ALTO CONTRASTE</title>
+    <title>Ubicación de Mesas - COLOR AL MIL POR CIENTO (NEUMORFISMO Y ALTO CONTRASTE)</title>
     <style>
         /* Paleta de Colores de Máximo Impacto */
         :root {
-            --color-marrondark: #1D1716;   /* Marrón/Negro Profundo */
-            --color-crema: #FCF9F5;
-            --color-blanco: #FFFFFF;     
+            /* Colores Base */
+            --color-marrondark: #3C2A1C;   /* Marrón Chocolate Profundo para Texto y Bordes */
+            --color-crema: #FCF9F5;        /* Fondo Base Cálido */
+            --color-blanco: #FFFFFF;       /* Blanco Puro para Contrastes */
             
             /* Color Primario VIVO (Salón Carrasco) */
             --color-primary-base: #AF710E;
-            --color-primary-light: #D9953F; /* Más claro */
-            --color-primary-dark: #7A4F0B;  /* Más oscuro y saturado */
+            --color-primary-light: #D49D46; 
+            --color-primary-dark: #8C5B0A;  
+            --color-primary-mid: #BF872F; 
             
-            /* Colores Secundarios (Marrón-Gris Cálido y Limpio) */
-            --color-secundario-claro: #E0E0E0; /* Gris muy limpio para oficinas */
-            --color-mesa-base: #BCAAA4;        /* Marrón Grisáceo para mesas */
-            --color-mesa-dark: #6D4C41;        /* Marrón para mesas principales */
+            /* Tonos Tostados Medios y Claros (Para Mesas y Áreas Secundarias) */
+            --color-mesa-base: #E8E8E8;        /* Gris Claro/Beige para Mesas Secundarias */
+            --color-mesa-tostada: #BCAAA4;     /* Tostado Medio para Oratorio/Contraste */
             
             /* Colores de Funcionalidad (Se mantienen) */
             --color-ingreso: #4CAF50;
@@ -27,7 +28,7 @@
             
             --gap: 4px; 
             
-            /* DIMENSIONES CLAVE (ESTRUCTURA INTACTA) */
+            /* DIMENSIONES CLAVE (ESTRUCTURA 100% INTACTA) */
             --plano-width-container: 470px;
             --plano-height: 510px;
             --area-top-height: 50px;
@@ -54,8 +55,7 @@
             width: var(--plano-width-container);
             padding: 20px;
             border-radius: 18px;
-            /* Fondo muy blanco */
-            background-color: var(--color-blanco);
+            background: linear-gradient(135deg, var(--color-blanco) 0%, #F5F5F5 100%);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); 
             border: 6px solid var(--color-marrondark);
         }
@@ -66,28 +66,29 @@
             font-weight: 800;
             color: var(--color-marrondark);
             margin-bottom: 15px;
-            text-shadow: 1px 1px 0 var(--color-marronsuave);
+            /* Sombra sutil de texto */
+            text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5);
         }
 
         .plano {
             width: calc(100% - var(--gap) * 2); 
             height: var(--plano-height);
             position: relative;
-            background-color: var(--color-blanco); 
+            /* Degradado de "papel limpio" */
+            background: linear-gradient(180deg, #F9F9F9 0%, var(--color-blanco) 100%); 
             border: 1px solid #D0D0D0; 
             margin: var(--gap);
             overflow: hidden; 
         }
 
-        /* --- 0. ELIMINACIÓN DE BORDES Y SOMBRAS (Limpieza) --- */
+        /* --- LIMPIEZA DE BORDES Y SOMBRAS --- */
         .area, .mesa, .recuadro {
             border: none !important; 
             box-shadow: none !important; 
         }
         
-        /* --- ESTILO GENERAL --- */
-        .area, .mesa {
-            position: absolute;
+        /* --- ESTILO GENERAL (Solo color/relieve) --- */
+        .area, .mesa, .recuadro {
             text-align: center;
             font-size: 0.65em;
             font-weight: 600;
@@ -97,39 +98,33 @@
             box-sizing: border-box;
             border-radius: 8px; 
             padding: 3px;
-            color: var(--color-marrondark);
-            /* Borde definido para separar los bloques visualmente */
-            border: 1px solid rgba(0, 0, 0, 0.1); 
+            /* Color de texto principal */
+            color: var(--color-marrondark); 
+            /* Sombra suave para efecto neumórfico */
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1), -2px -2px 5px var(--color-blanco);
         }
-        
+
         /* === 1. FRANJA SUPERIOR: VIVO Y ALTAMENTE SATURADO === */
         .sshh, .bar-cafe { 
             height: var(--area-top-height); 
             top: 5px; 
             color: var(--color-blanco) !important; 
+            /* Sombra más intensa para definir la cabecera */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4), inset 0 0 10px rgba(0, 0, 0, 0.3);
         }
         
-        /* 1. SS. HH. CABALLEROS */
-        .sshh-cab { background: linear-gradient(to right, var(--color-primary-dark), var(--color-primary-base)); }
-
-        /* 2. BAR */
-        .bar { background: linear-gradient(to right, var(--color-primary-base), var(--color-primary-light)); }
-
-        /* 3. CAFETERÍA */
-        .cafeteria { background: linear-gradient(to right, var(--color-primary-light), var(--color-primary-base)); }
-
-        /* 4. SS. HH. DAMAS */
-        .sshh-damas { background: linear-gradient(to right, var(--color-primary-base), var(--color-primary-dark)); }
+        /* Degradados VIVOS (Colores más intensos) */
+        .sshh-cab { background: linear-gradient(to right, var(--color-primary-dark), var(--color-primary-mid)); left: 0; }
+        .bar { background: linear-gradient(to right, var(--color-primary-mid), var(--color-primary-light)); left: calc(18% + var(--gap)); }
+        .cafeteria { background: linear-gradient(to right, var(--color-primary-light), var(--color-primary-mid)); left: calc(18% + 30% + var(--gap) * 2); }
+        .sshh-damas { background: linear-gradient(to right, var(--color-primary-mid), var(--color-primary-dark)); right: 0; }
 
         /* --- POSICIONAMIENTO SUPERIOR (INTACTO) --- */
         .w-sshh { width: 18%; }
         .w-bar-cafe { width: 30%; }
-        .sshh-cab { left: 0; }
-        .bar { left: calc(18% + var(--gap)); }
-        .cafeteria { left: calc(18% + 30% + var(--gap) * 2); }
-        .sshh-damas { right: 0; }
 
-        /* === 2. MESAS: SIMPLIFICADAS Y JERARQUIZADAS === */
+
+        /* === 2. MESAS: RELIEVE SUAVE Y CONTRASTE INTENSO === */
         .mesa { 
             z-index: 10; 
             padding: 6px 8px; 
@@ -138,17 +133,16 @@
             width: 130px; 
             height: var(--mesa-height); 
             line-height: 1.2;
-            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Sombra muy sutil */
         }
         
-        /* Posiciones Verticales Mantenidas */
+        /* Posiciones Verticales (INTACTAS) */
         .mesa-4 { top: 81px; left: 0; } 
         .mesa-5 { top: 81px; right: 0; }
         .mesa-3 { top: 155px; left: 0; } 
         .mesa-2 { top: 229px; left: 0; } 
         .mesa-1 { top: 229px; right: 0; }
         
-        /* Estilo de la flecha */
+        /* Estilo de la flecha (INTACTO) */
         .mesa::after {
             content: '';
             position: absolute;
@@ -163,28 +157,28 @@
         .mesa-derecha::after { right: -15px; border-left: 15px solid; } 
         .mesa-izquierda::after { left: -15px; border-right: 15px solid; } 
 
-        /* Mesas Secundarias (4, 5, 2): Color plano y limpio */
+        /* Mesas Secundarias (4, 5, 2): Tono casi blanco/Crema limpio */
         .mesa-4, .mesa-5, .mesa-2 { 
             background: var(--color-mesa-base); 
-            color: var(--color-marrondark); /* Texto oscuro */
+            color: var(--color-marrondark); 
         }
         .mesa-4::after { border-right-color: var(--color-mesa-base); }
         .mesa-5::after { border-left-color: var(--color-mesa-base); }
         .mesa-2::after { border-right-color: var(--color-mesa-base); }
 
 
-        /* Mesas Primarias (3 y 1): Marrón oscuro y degradado para jerarquía */
+        /* Mesas Primarias (3 y 1): Marrón Chocolate Intenso */
         .mesa-3 { 
-            background: linear-gradient(135deg, var(--color-mesa-dark), var(--color-marrondark)); 
+            background: linear-gradient(135deg, var(--color-marrondark), #211A1A); 
             color: var(--color-blanco); 
         }
-        .mesa-3::after { border-right-color: var(--color-marrondark); }
+        .mesa-3::after { border-right-color: #211A1A; }
         
         .mesa-1 { 
-            background: linear-gradient(135deg, var(--color-marrondark), var(--color-mesa-dark)); 
+            background: linear-gradient(135deg, #211A1A, var(--color-marrondark)); 
             color: var(--color-blanco); 
         }
-        .mesa-1::after { border-left-color: var(--color-mesa-dark); }
+        .mesa-1::after { border-left-color: var(--color-marrondark); }
 
 
         /* === 3. FRANJA INFERIOR: COHESIÓN Y LIMPIEZA === */
@@ -193,20 +187,22 @@
         .color-salon { 
             background: linear-gradient(to bottom right, var(--color-primary-light), var(--color-primary-dark)); 
             color: var(--color-blanco); 
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Sombra para levantar el salón */
         }
         
-        /* Oratorio: Marrón cálido y plano */
+        /* Oratorio: Tostado Medio */
         .color-oratorio { 
-            background-color: var(--color-mesa-base);
+            background-color: var(--color-mesa-tostada);
             color: var(--color-marrondark);
         } 
         
-        /* Oficinas (Fiscalía / Jurado Electoral): Gris Limpio y claro */
+        /* Oficinas (Fiscalía / Jurado Electoral): Gris Limpio y Claro */
         .color-office { 
-            background-color: var(--color-secundario-claro); 
+            background-color: var(--color-mesa-base); 
             color: var(--color-marrondark);
         }
 
+        /* Contenedores de Columna (INTACTOS - ESTRUCTURA) */
         .franja-inferior {
             position: absolute;
             top: var(--area-bottom-top); 
@@ -220,13 +216,12 @@
             gap: var(--gap);
         }
 
-        /* Estilos generales de los recuadros inferiores (INTACTOS) */
         .columna { height: 100%; box-sizing: border-box; display: flex; flex-direction: column; gap: var(--gap); }
         .columna-1 { flex-basis: 25%; } 
         .columna-2 { flex-basis: 20%; } 
         .columna-3 { flex-grow: 1; }   
         .columna-4 { flex-basis: 18%; } 
-        .recuadro { text-align: center; font-size: 0.65em; font-weight: 600; color: var(--color-marrondark); display: flex; justify-content: center; align-items: center; box-sizing: border-box; border-radius: 8px; padding: 3px; }
+
         .recuadro-full { height: 100%; } 
         .recuadro-top { height: var(--stacked-top-height); } 
         .recuadro-bottom { flex-grow: 1; } 
@@ -251,4 +246,42 @@
         <div class="mesa mesa-izquierda mesa-4">MESA N° 4 <br> CUADRILLAS 13 - 14 - 15 - 16</div>
         <div class="mesa mesa-izquierda mesa-3">MESA N° 3 <br> CUADRILLAS 9 - 10 - 11 - 12</div>
         <div class="mesa mesa-izquierda mesa-2">MESA N° 2 <br> CUADRILLAS 5 - 6 - 7 - 8</div>
-        <div class="mesa mesa-derecha mesa-5">MESA N° 5 <br> CUADRILLAS 17 - 18 - 19 - 20 <br> **CANTOR
+        <div class="mesa mesa-derecha mesa-5">MESA N° 5 <br> CUADRILLAS 17 - 18 - 19 - 20 <br> **CANTORAS**</div>
+        <div class="mesa mesa-derecha mesa-1">MESA N° 1 <br> CUADRILLA 1 <br> **SAHUMADORAS**</div>
+
+        <div class="franja-inferior">
+            
+            <div class="columna columna-1">
+                <div class="recuadro color-salon recuadro-full">SALÓN CARRASCO</div>
+            </div>
+            
+            <div class="columna columna-2">
+                <div class="recuadro color-office recuadro-top">FISCALÍA</div>
+                <div class="recuadro color-salon recuadro-bottom">SALÓN VIRGEN DEL CARMEN</div>
+            </div>
+            
+            <div class="columna columna-3">
+                <div class="recuadro recuadro-full ingreso-salida-box">
+                    <div class="label-io">
+                        <div class="flecha flecha-salida" style="color: var(--color-salida);">&darr;</div>
+                        <div style="color: var(--color-marrondark); font-weight: 700;">SALIDA</div>
+                    </div>
+                    <div class="label-io">
+                        <div style="color: var(--color-marrondark); font-weight: 700;">INGRESO</div>
+                        <div class="flecha flecha-ingreso" style="color: var(--color-ingreso);">&uarr;</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="columna columna-4">
+                <div class="recuadro color-office recuadro-top">JURADO ELECTORAL</div>
+                <div class="recuadro color-oratorio recuadro-bottom">ORATORIO</div>
+            </div>
+            
+        </div>
+        
+    </div>
+</div>
+
+</body>
+</html>
