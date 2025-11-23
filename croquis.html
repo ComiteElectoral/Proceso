@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ubicación de Mesas - DISEÑO FINAL CON DEGRADADOS PROFESIONALES Y COHESIÓN DE COLOR</title>
+    <title>Ubicación de Mesas - DISEÑO FINAL CON DEGRADADOS MÁS NOTORIOS</title>
     <style>
         /* Paleta de Colores: Marrón, Crema, Blanco y Acentos */
         :root {
@@ -17,10 +17,11 @@
             --color-salida: #F44336;
             --gap: 4px; 
             
-            /* Colores base para la cohesión con Salón Carrasco */
-            --base-salon-dark: #8B4513; 
-            --base-salon-light: #A0522D;
-            --base-salon-mid: #A5774F; /* Un tono medio cálido para variar */
+            /* Colores Base para el Degradado Superior (Más contrastantes) */
+            --degrade-extremo-dark: #6D4C41; /* Marrón oscuro para los SS.HH. */
+            --degrade-punto-medio-a: #8D6E63; /* Marrón medio para la transición */
+            --degrade-punto-medio-b: #A1887F; /* Marrón más claro en el centro */
+            --degrade-centro-light: #C5A78B; /* Marrón más cálido y claro para Cafetería */
             
             /* DIMENSIONES CLAVE */
             --plano-width-container: 470px;
@@ -96,22 +97,22 @@
             padding: 3px;
         }
         
-        /* --- FRANJA SUPERIOR: DEGRADADOS INDIVIDUALES Y TEXTO BLANCO --- */
+        /* --- FRANJA SUPERIOR: DEGRADADOS CON MÁS CONTRASTE Y TEXTO BLANCO --- */
         .sshh, .bar-cafe { 
             color: var(--color-blanco) !important; /* Texto blanco forzado */
         }
         
         /* 1. SS. HH. CABALLEROS (Oscuro a medio) */
-        .sshh-cab { background: linear-gradient(to right, var(--base-salon-dark), var(--base-salon-mid)); }
+        .sshh-cab { background: linear-gradient(to right, var(--degrade-extremo-dark), var(--degrade-punto-medio-a)); }
 
         /* 2. BAR (Medio a claro) */
-        .bar { background: linear-gradient(to right, var(--base-salon-mid), var(--base-salon-light)); }
+        .bar { background: linear-gradient(to right, var(--degrade-punto-medio-a), var(--degrade-punto-medio-b)); }
 
-        /* 3. CAFETERÍA (Claro a medio) */
-        .cafeteria { background: linear-gradient(to right, var(--base-salon-light), var(--base-salon-mid)); }
+        /* 3. CAFETERÍA (Claro a más claro) */
+        .cafeteria { background: linear-gradient(to right, var(--degrade-punto-medio-b), var(--degrade-centro-light)); }
 
-        /* 4. SS. HH. DAMAS (Medio a oscuro) */
-        .sshh-damas { background: linear-gradient(to right, var(--base-salon-mid), var(--base-salon-dark)); }
+        /* 4. SS. HH. DAMAS (Más claro a oscuro) */
+        .sshh-damas { background: linear-gradient(to right, var(--degrade-centro-light), var(--degrade-extremo-dark)); }
 
         /* --- 1. ESTRUCTURA SUPERIOR (POSICIONAMIENTO RESTAURADO) --- */
         .sshh, .bar-cafe { height: var(--area-top-height); top: 5px; }
@@ -212,6 +213,11 @@
             border-radius: 8px; 
             padding: 3px;
         }
+        
+        /* Colores y Degradados de Áreas inferiores (Mantenidos) */
+        .color-salon { background: linear-gradient(to bottom right, #A0522D, #8B4513); color: var(--color-blanco); }
+        .color-oratorio { background: linear-gradient(to bottom right, #D2B48C, #C9A98A); }
+        .color-office { background-color: #E0E0E0; }
 
         /* Estilos específicos de Altura */
         .recuadro-full { height: 100%; } 
